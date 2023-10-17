@@ -1,0 +1,100 @@
+.movie_card {
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  color: #fff;
+  height: 75vh;
+}
+
+.card_content {
+  width: 100%;
+  position: absolute;
+  height: 75vh;
+}
+
+.card_content > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.card_titre_movie {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 10px 15px;
+  background: linear-gradient(#ffffff00, black);
+  color: #fff;
+  font-size: 1.2rem;
+  z-index: 1;
+  border-radius: 0px 0px 20px 20px;
+  margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+.swipe {
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+  z-index: 1;
+}
+.card_descr_movie {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 10px 15px;
+  background: rgba(0, 0, 0, 0.596);
+  color: #fff;
+  font-size: 1.2rem;
+  z-index: 1;
+  border-radius: 20px;
+  padding: 20px;
+  overflow: scroll;
+  transition: opacity 300ms ease-in-out;
+  backdrop-filter: blur(4px);
+}
+
+.movie_title {
+  width: 100%;
+  text-align: center;
+}
+
+.movie_synopsis > h5 {
+  margin-top: 20px;
+  font-size: 20px;
+}
+
+.movie_synopsis > p {
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  font-size: 15px;
+}
+.movie_detail {
+  margin: 10px;
+}
+
+.movie_detail > p {
+  margin-top: 10px;
+  letter-spacing: 0.5px;
+  line-height: 20px;
+  font-size: 15px;
+}
+
+.svg_return {
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+}
+
+.icon_info {
+  cursor: pointer;
+}
+
+.blur {
+  filter: blur(4px);
+}

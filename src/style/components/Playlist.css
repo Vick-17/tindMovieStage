@@ -1,0 +1,8 @@
+.rwd-table {
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  border-spacing: 0.4em;
+  letter-spacing: 0.5px;
+  transition: 1s ease-in-out;
+}

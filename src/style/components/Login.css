@@ -1,0 +1,11 @@
+.submit_btn{
+    background-color: #1c9cea !important;
+    font-weight: bold;
+}
+
+.login_container {
+   text-align: center;
+}
+.MuiBox-root{
+    margin: 0 !important;
+}

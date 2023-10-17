@@ -1,0 +1,15 @@
+@import './App.css';
+@import './components/Header.css';
+@import './components/MoviesCard.css';
+@import './components/MessageBox.css';
+@import './components/HeaderMessage.css';
+@import './components/MovieRate.css';
+@import './components/Login.css';
+@import './components/iconswipe.css';
+@import './components/Sidebar.css';
+@import './page/Test.css';
+@import './components/HeaderProfil.css';
+@import './components/userPlaylist.css';
+@import './components/Playlist.css';
+@import './components/Modal.css';
+@import './components/Loader.css';

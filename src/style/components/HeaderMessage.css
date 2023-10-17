@@ -1,0 +1,15 @@
+.header_message {
+    display: flex;
+    padding: 35px 20px;
+}
+.user_message_name {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  font-size: 1.5rem;
+  letter-spacing: 1px;
+  color: #2C2C2C;
+}
+.svg_return {
+  width: 10%;
+}

@@ -1,0 +1,49 @@
+.message_container {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.my_message {
+  background-color: #1c9cea;
+  padding: 20px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 70%;
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 10px;
+  background-color: #1c9cea;
+  padding: 20px;
+  border-radius: 10px 10px 0 10px;
+  max-width: 70%;
+  font-size: 12px;
+  color: #fff;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+.send_message {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  background-color: #2C2C2C;
+  padding-bottom: 20px;
+}
+
+.send_message input {
+    width: 100%;
+    margin: 10px 10px;
+    border: none;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.send_message button {
+    background-color: #E08D2A;
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    border: none;
+    margin: 10px 10px;
+}

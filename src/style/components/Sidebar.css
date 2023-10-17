@@ -1,0 +1,57 @@
+/* CSS */
+.sidebar {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 999;
+  top: 0;
+  right: -100%;
+  background-color: rgba(0, 0, 0, 0.404);
+  overflow-x: hidden;
+  transition: right 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+}
+
+.sidebar.show {
+  right: 0;
+}
+
+.sidebar_content {
+  width: 60%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+}
+
+.sidebar_content li {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  list-style: none;
+  padding: 5px 10px 5px 10px;
+}
+
+.btn_go_login {
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  width: 55%;
+  padding: 10px;
+  border: none;
+  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.473);
+  background-color: #1c9cea;
+  border-radius: 6px;
+}
+
+.btn_go_login a {
+  padding: 0;
+  margin: 0;
+  color: #fff;
+}

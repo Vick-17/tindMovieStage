@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  app:
+    entrypoint:
+    - sleep
+    - infinity
+    build: .
+    init: true
+    volumes:
+    - type: bind
+      source: /var/run/docker.sock
+      target: /var/run/docker.sock
+
+  postgres_db_data:
+    image: postgres:13
+    container_name: postgres_db_data
+    environment:
+      POSTGRES_USER: postgres #username de conexion de la bdd
+      POSTGRES_PASSWORD: iie254007 #password de la bdd
+      POSTGRES_DB: data #nom de la bdd
+    volumes:
+      - postgres_db_data:/var/lib/postgresql/data #volume pour sauvegarder les données
+    ports:
+      - 5432:5432 #port, peux être changé si besoin mais uniquement le premier 5432
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 10s
+      start_period: 30s
+
+volumes:
+  postgres_db_data:
+    driver: local
