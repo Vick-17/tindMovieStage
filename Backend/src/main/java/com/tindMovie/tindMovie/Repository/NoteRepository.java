@@ -9,4 +9,6 @@ public interface NoteRepository extends CrudRepository<NoteEntity, Long> {
     NoteEntity findByUserIdAndMovieId(Long userId, Long movieId);
 
     List<NoteEntity> findByMovieId(Long movieId);
+
+    List<NoteEntity> findByUserId(Long userId);
 }

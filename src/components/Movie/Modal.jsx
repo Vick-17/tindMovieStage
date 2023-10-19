@@ -5,6 +5,7 @@ import SendIcon from "@mui/icons-material/Send";
 import Button from "@mui/material/Button";
 import { addCommentAndNote } from "../../service/apiService";
 import { useUserData } from "../../service/userService";
+import { toast, Toaster } from "react-hot-toast";
 
 const Modal = ({ show, onClose, filmId }) => {
   const [noteValue, setNoteValue] = useState(0);
@@ -31,9 +32,7 @@ const Modal = ({ show, onClose, filmId }) => {
       await addCommentAndNote(commentData, noteData);
       onClose();  // Fermer la modal après l'envoi réussi
     } catch (error) {
-      console.error("Erreur lors de l'envoi des données :", error);
-      console.log("user : " + userId + " film : " + filmId + " comment : " + comment);
-      // Gérer les erreurs ici si nécessaire
+      toast.error("Vous avez déjà noter  se films");
     }
   };
 
@@ -43,6 +42,7 @@ const Modal = ({ show, onClose, filmId }) => {
 
   return (
     <div className="modal-overlay">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className="modal">
         <h2>Noter le Film</h2>
         <form onSubmit={handleSubmit}>

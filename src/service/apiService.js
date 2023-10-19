@@ -246,14 +246,10 @@ export const addCommentAndNote = async (commentData, noteData) => {
       },
       body: JSON.stringify(noteData),
     });
-    if (commentResponse.status === 403 && noteResponse.status === 403) {
-      console.log("Film déja notée");
-    }
     const commentResponseData = await commentResponse.json();
     const noteResponseData = await noteResponse.json();
     return commentResponseData + noteResponseData
   } catch (error) {
-    console.error(error);
     throw error;
   }
 };

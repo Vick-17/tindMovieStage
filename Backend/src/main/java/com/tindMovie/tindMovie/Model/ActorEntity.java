@@ -11,6 +11,7 @@ public class ActorEntity {
 
     @Column(name = "actor_name")
     private String actorName;
+    
     @Column(name = "movie_ids")
     private Long[] movieIds;
 
