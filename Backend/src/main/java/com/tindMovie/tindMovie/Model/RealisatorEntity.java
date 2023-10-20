@@ -1,4 +1,6 @@
 package com.tindMovie.tindMovie.Model;
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +15,7 @@ public class RealisatorEntity {
     private String realisatorName;
 
     @Column(name = "movie_ids")
-    private Long[] movieIds;
+    private List<Long> movieIds;
 
     public Long getId() {
         return id;
@@ -31,11 +33,11 @@ public class RealisatorEntity {
         this.realisatorName = realisatorName;
     }
 
-    public Long[] getMovieIds() {
+    public List<Long> getMovieIds() {
         return movieIds;
     }
 
-    public void setMovieIds(Long[] movieIds) {
+    public void setMovieIds(List<Long> movieIds) {
         this.movieIds = movieIds;
     }
 }

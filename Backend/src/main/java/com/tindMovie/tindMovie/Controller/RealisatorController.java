@@ -17,9 +17,9 @@ public class RealisatorController {
         this.realisatorService = realisatorService;
     }
 
-    @CrossOrigin
-    @GetMapping("/{realisatorId}/realisator-filmography")
-    public List<MovieEntity> getRealFilmography(@PathVariable Long realisatorId) {
-        return realisatorService.getFilmographyForRealisator(realisatorId);
-    }
+    // @CrossOrigin
+    // @GetMapping("/{realisatorId}/realisator-filmography")
+    // public List<MovieEntity> getRealFilmography(@PathVariable Long realisatorId) {
+    //     return realisatorService.getFilmographyForRealisator(realisatorId);
+    // }
 }

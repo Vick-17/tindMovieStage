@@ -11,8 +11,18 @@ import java.util.List;
 
 @Repository
 public interface ActorRepository extends CrudRepository<ActorEntity, Long> {
+
     @Query("SELECT m FROM MovieEntity m WHERE m.id IN :movieIds")
     List<MovieEntity> findMovieByActor(@Param("movieIds") List<Long> movieIds);
 
-    List<ActorEntity> findByMovieIdsContains(Long movieId);
+    @Query("SELECT a.actorName FROM ActorEntity a WHERE :movieId IN (a.movieIds)")
+    List<String> findActorsForMovie(@Param("movieId") Long movieId);    
+
+    // @Query("SELECT a FROM ActorEntity a " +
+    //         "WHERE a.id NOT IN :actorIds " +
+    //         "AND EXISTS (SELECT m FROM MovieEntity m WHERE m.id != :movieId AND a MEMBER OF m.actors)")
+    // List<ActorEntity> findActorsInOtherMovies(@Param("actorIds") List<Long> actorIds, @Param("movieId") Long movieId);
+
+    // @Query("SELECT m FROM MovieEntity m JOIN m.actors a WHERE a.id = :actorId AND m.id != :movieId")
+    // List<MovieEntity> findMoviesForActorInOtherMovies(@Param("actorId") Long actorId, @Param("movieId") Long movieId);
 }

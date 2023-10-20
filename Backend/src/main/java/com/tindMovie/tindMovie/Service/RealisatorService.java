@@ -19,13 +19,13 @@ public class RealisatorService {
         this.realisatorRepository = realisatorRepository;
     }
 
-    public List<MovieEntity> getFilmographyForRealisator(Long realisatorId) {
-        RealisatorEntity realisator = realisatorRepository.findById(realisatorId).orElse(null);
-        if (realisator != null && realisator.getMovieIds() != null && realisator.getMovieIds().length > 0 ) {
-            List<Long> movieIds = Arrays.asList(realisator.getMovieIds());
-            return realisatorRepository.findMovieByRealisator(movieIds);
-        } else {
-            return Collections.emptyList();
-        }
-    }
+    // public List<MovieEntity> getFilmographyForRealisator(Long realisatorId) {
+    //     RealisatorEntity realisator = realisatorRepository.findById(realisatorId).orElse(null);
+    //     if (realisator != null && realisator.getMovieIds() != null && realisator.getMovieIds().length > 0 ) {
+    //         List<Long> movieIds = Arrays.asList(realisator.getMovieIds());
+    //         return realisatorRepository.findMovieByRealisator(movieIds);
+    //     } else {
+    //         return Collections.emptyList();
+    //     }
+    // }
 }

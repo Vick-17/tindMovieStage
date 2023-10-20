@@ -9,6 +9,5 @@ import com.tindMovie.tindMovie.Model.GenreEntity;
 @Repository
 public interface GenreRepository extends CrudRepository<GenreEntity, Long> {
 
-    List<GenreEntity> findByMovieIdsContains(Long movieId);
     
 }

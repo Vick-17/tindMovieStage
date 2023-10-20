@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 @Table(name = "movie")
 public class MovieEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -15,21 +16,13 @@ public class MovieEntity {
     private String dates;
     private String duree;
     private String image;
+
     @Column(name = "note_moyenne")
     private Integer noteMoyenne;
     private String synopsis;
 
     @Column(name = "commentaire_id")
     private Long commentaireId;
-
-    @ManyToMany
-    @JoinTable(
-            name = "movie_actor",
-            joinColumns = @JoinColumn(name = "movie_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id")
-    )
-    private List<ActorEntity> actors;
-
 
     public Long getId() {
         return id;
@@ -93,13 +86,5 @@ public class MovieEntity {
 
     public void setSynopsis(String synopsis) {
         this.synopsis = synopsis;
-    }
-
-    public List<ActorEntity> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<ActorEntity> actors) {
-        this.actors = actors;
     }
 }

@@ -14,5 +14,4 @@ public interface RealisatorRepository extends CrudRepository<RealisatorEntity, L
     @Query("SELECT m FROM MovieEntity m WHERE m.id IN :movieIds")
     List<MovieEntity> findMovieByRealisator(@Param("movieIds") List<Long> movieIds);
 
-    List<RealisatorEntity> findByMovieIdsContains(Long movieId);
 }

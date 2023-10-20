@@ -1,5 +1,7 @@
 package com.tindMovie.tindMovie.Model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +13,7 @@ public class ActorEntity {
 
     @Column(name = "actor_name")
     private String actorName;
-    
+
     @Column(name = "movie_ids")
     private Long[] movieIds;
 
@@ -38,4 +40,5 @@ public class ActorEntity {
     public void setMovieIds(Long[] movieIds) {
         this.movieIds = movieIds;
     }
+
 }
