@@ -8,119 +8,116 @@ import com.tindMovie.tindMovie.Repository.MovieRepository;
 import com.tindMovie.tindMovie.Repository.NoteRepository;
 import com.tindMovie.tindMovie.Repository.SwipeRepository;
 import com.tindMovie.tindMovie.Service.ActorService;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
+import com.tindMovie.tindMovie.Service.AlgoService;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
 @RequestMapping("/movie")
 public class MovieController {
 
-    @Autowired
-    private MovieRepository movieRepository;
+  @Autowired
+  private MovieRepository movieRepository;
 
-    @Autowired
-    private SwipeRepository swipeRepository;
+  @Autowired
+  private SwipeRepository swipeRepository;
 
-    @Autowired
-    private ActorService actorService;
+  @Autowired
+  private ActorService actorService;
 
-    @Autowired
-    private NoteRepository noteRepository;
+  @Autowired
+  private AlgoService algoService;
 
-    @CrossOrigin
-    @GetMapping(value = "/allMovies")
-    @ResponseStatus(HttpStatus.OK)
-    public Iterable<MovieEntity> getAllMovie() {
-        return movieRepository.findAll();
-    }
+  @Autowired
+  private NoteRepository noteRepository;
 
-    @CrossOrigin
-    @GetMapping("/{movieId}/actors")
-    @ResponseStatus(HttpStatus.OK)
-    public List<ActorEntity> getActorsForMovie(@PathVariable Long movieId) {
-        return actorService.getActorsForMovie(movieId);
-    }
+  @CrossOrigin
+  @GetMapping(value = "/allMovies")
+  @ResponseStatus(HttpStatus.OK)
+  public Iterable<MovieEntity> getAllMovie() {
+    return movieRepository.findAll();
+  }
 
-    @CrossOrigin
-    @GetMapping("/getMovieById/{movieId}")
-    @ResponseStatus(HttpStatus.OK)
-    public Optional<MovieEntity> getMovieById(@PathVariable Long movieId) {
-        return movieRepository.findById(movieId);
-    }
+  @CrossOrigin
+  @GetMapping("/{movieId}/actors")
+  @ResponseStatus(HttpStatus.OK)
+  public List<ActorEntity> getActorsForMovie(@PathVariable Long movieId) {
+    return actorService.getActorsForMovie(movieId);
+  }
 
-    @CrossOrigin
-    @GetMapping(value = "/allMovieByUser/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MovieEntity> getMovieByUser(@PathVariable Long userId) {
-        Iterable<MovieEntity> allIterableMovies = movieRepository.findAll();
+  @CrossOrigin
+  @GetMapping("/getMovieById/{movieId}")
+  @ResponseStatus(HttpStatus.OK)
+  public Optional<MovieEntity> getMovieById(@PathVariable Long movieId) {
+    return movieRepository.findById(movieId);
+  }
 
-        List<MovieEntity> allMovies = StreamSupport
-                .stream(allIterableMovies.spliterator(), false)
-                .toList();
+  @CrossOrigin
+  @GetMapping(value = "/allMovieByUser/{userId}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<MovieEntity> getMovieByUser(@PathVariable Long userId) {
+    Iterable<MovieEntity> allIterableMovies = movieRepository.findAll();
 
-        List<SwipeEntity> swipesByUser = swipeRepository.findByUserId(userId);
+    List<MovieEntity> allMovies = StreamSupport
+      .stream(allIterableMovies.spliterator(), false)
+      .toList();
 
-        List<Long> movieSwipedIds = swipesByUser.stream()
-                .map(SwipeEntity::getFilmId)
-                .toList();
+    List<SwipeEntity> swipesByUser = swipeRepository.findByUserId(userId);
 
-        return allMovies.stream()
-                .filter(movie -> !movieSwipedIds.contains(movie.getId()))
-                .collect(Collectors.toList());
-    }
+    List<Long> movieSwipedIds = swipesByUser
+      .stream()
+      .map(SwipeEntity::getFilmId)
+      .toList();
 
-    @CrossOrigin
-    @GetMapping("/recommendation/{userId}")
-    @ResponseStatus(HttpStatus.OK)
-    public List<MovieEntity> getRecommendationForUser(@PathVariable Long userId) {
+    return allMovies
+      .stream()
+      .filter(movie -> !movieSwipedIds.contains(movie.getId()))
+      .collect(Collectors.toList());
+  }
 
-        List<NoteEntity> userNote = noteRepository.findByUserId(userId);
+  /**
+   * Obtenir des recommandations de films pour un utilisateur en fonction de ses notes et des acteurs qu'il a appréciés.
+   * @param userId L'identifiant de l'utilisateur pour lequel les recommandations sont demandées.
+   * @return Une liste de films recommandés.
+   */
+  @CrossOrigin
+  @GetMapping("/recommendation/{userId}")
+  @ResponseStatus(HttpStatus.OK)
+  public List<MovieEntity> getRecommendationForUser(@PathVariable Long userId) {
+    // Récupère les notes de l'utilisateur
+    List<NoteEntity> userNotes = noteRepository.findByUserId(userId);
 
-        List<Long> hightRatingMoviesIds = userNote.stream()
-                .filter(s -> s.getRating() >= 3)
-                .map(s -> s.getMovieId())
-                .toList();
+    // Extraire les identifiants de films avec des notes élevées (>=3)
+    List<Long> hightRatingMovieIds = algoService.getHighRatingMovieIds(
+      userNotes
+    );
 
-        List<Long> likedActors = new ArrayList<>();
+    // Extraire les acteurs et réalisateur appréciés par l'utilisateur
+    List<Long> likedActors = algoService.getLikedActors(hightRatingMovieIds);
+    List<Long> likedRealisators = algoService.getLikedRealisators(
+      hightRatingMovieIds
+    );
 
-        for (Long movieId : hightRatingMoviesIds) {
-            List<ActorEntity> actorsForMovie = actorService.getActorsForMovie(movieId);
-            for (ActorEntity actor : actorsForMovie) {
-                likedActors.add(actor.getId());
-            }
-        }
+    // Identifier les acteurs et realisateurs appréciés fréquement
+    List<Long> commonActors = algoService.getCommonActors(likedActors);
+    List<Long> commonRealisators = algoService.getCommonRealisators(
+      likedRealisators
+    );
 
-        // Filtre les acteurs qui apparaissent au moins deux fois
-        Map<Long, Long> actorCounts = likedActors.stream()
-                .collect(Collectors.groupingBy(actor -> actor, Collectors.counting()));
+    // Obtenir kes films recommandés en fonction des acteurs et réal
+    List<MovieEntity> recommendedMovies = algoService.getRecommendedMovies(
+      commonActors,
+      commonRealisators,
+      hightRatingMovieIds
+    );
 
-        List<Long> commonActors = actorCounts.entrySet().stream()
-                .filter(entry -> entry.getValue() >= 2)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toList());
-
-        // Obtenir des films recommandés basés sur les acteurs communs
-        List<MovieEntity> recommendedMovies = new ArrayList<>();
-
-        for (Long actorId : commonActors) {
-            List<MovieEntity> moviesByActor = actorService.getMoviesByActorId(actorId);
-
-            // Ajoute les films non notés par l'utilisateur
-            recommendedMovies.addAll(moviesByActor.stream()
-                    .filter(movie -> !hightRatingMoviesIds.contains(movie.getId()))
-                    .collect(Collectors.toList()));
-        }
-
-        return recommendedMovies;
-    }
+    // Retourner la liste de films recommandés
+    return recommendedMovies;
+  }
 }

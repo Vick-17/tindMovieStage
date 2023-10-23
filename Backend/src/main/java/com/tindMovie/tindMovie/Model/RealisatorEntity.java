@@ -15,7 +15,7 @@ public class RealisatorEntity {
     private String realisatorName;
 
     @Column(name = "movie_ids")
-    private List<Long> movieIds;
+    private Long[] movieIds;
 
     public Long getId() {
         return id;
@@ -33,11 +33,11 @@ public class RealisatorEntity {
         this.realisatorName = realisatorName;
     }
 
-    public List<Long> getMovieIds() {
+    public Long[] getMovieIds() {
         return movieIds;
     }
 
-    public void setMovieIds(List<Long> movieIds) {
+    public void setMovieIds(Long[] movieIds) {
         this.movieIds = movieIds;
     }
 }

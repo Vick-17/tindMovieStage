@@ -9,7 +9,6 @@ import com.tindMovie.tindMovie.Repository.UserRepository;
 import com.tindMovie.tindMovie.Repository.UserRoleRepository;
 import com.tindMovie.tindMovie.Service.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +20,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/users")
 @RequiredArgsConstructor
-@Slf4j
 public class UserController {
     @Autowired
     private UserRepository userRepository;
