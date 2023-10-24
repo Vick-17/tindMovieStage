@@ -4,6 +4,7 @@ import IconButton from "@mui/material/IconButton";
 import {
   getSwipeByUserId,
   getWatchedMovieByUserId,
+  getRecommendationByuser
 } from "../../service/apiService";
 import { useUserData } from "../../service/userService";
 import FullscreenIcon from "@mui/icons-material/Fullscreen";
@@ -12,6 +13,7 @@ import Loader from "../Static/Loader";
 const UserPlaylist = () => {
   const { userId } = useUserData();
   const [swipe, setSwipe] = useState([]);
+  const [recommendMovies, setRecommendMovies] = useState([])
   const [watchedMovies, setWatchedMovies] = useState([]);
   const [fullScreen, setFullScreen] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,6 +32,13 @@ const UserPlaylist = () => {
         console.error("Erreur c'est produite :", error);
       });
 
+    getRecommendationByuser(userId)
+      .then((response) => {
+        setRecommendMovies(response);
+      })
+      .catch((error) => {
+        console.error("Erreur c'est produite :", error);
+      })
     getWatchedMovieByUserId(userId)
       .then((response) => {
         setWatchedMovies(response);
@@ -73,7 +82,15 @@ const UserPlaylist = () => {
       <div className="user_block_container">
         <h5>Suggestion</h5>
         <div className={`playlist ${fullScreen ? "fullScreen" : ""}`}>
-          <Playlist />
+          {recommendMovies.map((movie, index) => (
+            <Playlist
+              key={movie.id}
+              titre={movie.titre}
+              userId={userId}
+              filmId={movie.id}
+              showLike={true}
+            />
+          ))}
         </div>
       </div>
       <div className="user_block_container">

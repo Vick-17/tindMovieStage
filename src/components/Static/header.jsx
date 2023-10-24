@@ -19,7 +19,7 @@ const Header = () => {
     <header>
     {showSidebar && <Sidebar onClose={handleCloseSidebar} />}
     <div className="message_icon">
-      <a href="/dev">
+      <a href="/message">
         <IconButton>
           <MessageIcon style={{ fontSize: 40, color: "#1C9CEA" }} />
         </IconButton>

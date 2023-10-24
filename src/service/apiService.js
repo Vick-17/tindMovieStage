@@ -14,6 +14,19 @@ export const getAllMovieByUser = async (userId) => {
   }
 };
 
+export const getRecommendationByuser = async (userId) => {
+try {
+  const response = await fetch(`${API_URL}/movie/recommendation/${userId}`);
+  if (!response.ok) {
+    throw new Error("Erreur lors de la récupération des films recommeder");
+  }
+  const data = await response.json();
+  return data;
+} catch (error) {
+  
+}
+};
+
 export const getLinkedUsername = async (userId) => {
   try {
     const response = await fetch(

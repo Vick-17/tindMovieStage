@@ -15,7 +15,7 @@ public class GenreEntity {
     private String nomGenre;
 
     @Column(name = "movie_ids")
-    private List<Long> movieIds;
+    private Long[] movieIds;
 
     public Long getId() {
         return this.id;
@@ -33,11 +33,11 @@ public class GenreEntity {
         this.nomGenre = nomGenre;
     }
 
-    public List<Long> getMovieIds() {
+    public Long[] getMovieIds() {
         return this.movieIds;
     }
 
-    public void setMovieIds(List<Long> movieIds) {
+    public void setMovieIds(Long[] movieIds) {
         this.movieIds = movieIds;
     }
 

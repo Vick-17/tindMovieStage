@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import Modal from "./Modal";
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 
-const Playlist = ({ id, titre, userId, filmId, showNotes }) => {
+const Playlist = ({ id, titre, userId, filmId, showNotes, showLike }) => {
   const [isWatched, setIsWatched] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 

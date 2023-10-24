@@ -1,7 +1,6 @@
 package com.tindMovie.tindMovie.Model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
 
 @Entity
 @Table(name = "user_role")

@@ -100,20 +100,19 @@ public class MovieController {
 
     // Extraire les acteurs et réalisateur appréciés par l'utilisateur
     List<Long> likedActors = algoService.getLikedActors(hightRatingMovieIds);
-    List<Long> likedRealisators = algoService.getLikedRealisators(
-      hightRatingMovieIds
-    );
+    List<Long> likedRealisators = algoService.getLikedRealisators(hightRatingMovieIds);
+    List<Long> likedGenre = algoService.getLikedGenres(hightRatingMovieIds);
 
     // Identifier les acteurs et realisateurs appréciés fréquement
     List<Long> commonActors = algoService.getCommonActors(likedActors);
-    List<Long> commonRealisators = algoService.getCommonRealisators(
-      likedRealisators
-    );
+    List<Long> commonRealisators = algoService.getCommonRealisators(likedRealisators);
+    List<Long> commonGenre = algoService.getCommonGenres(likedGenre);
 
     // Obtenir kes films recommandés en fonction des acteurs et réal
     List<MovieEntity> recommendedMovies = algoService.getRecommendedMovies(
       commonActors,
       commonRealisators,
+      commonGenre,
       hightRatingMovieIds
     );
 

@@ -1,7 +1,5 @@
 package com.tindMovie.tindMovie.Controller;
 
-import com.tindMovie.tindMovie.Model.CommentaireEntity;
-import com.tindMovie.tindMovie.Model.MovieEntity;
 import com.tindMovie.tindMovie.Model.NoteEntity;
 import com.tindMovie.tindMovie.Repository.CommentaireRepository;
 import com.tindMovie.tindMovie.Repository.MovieRepository;
