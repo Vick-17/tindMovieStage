@@ -9,7 +9,7 @@ import {
 } from "../../service/apiService";
 import { useState } from "react";
 
-const MovieRate = (movieAffiche) => {
+const MovieRate = ({ movieAffiche, title }) => {
   const { movieId } = useParams();
   const [comment, setComment] = useState([]);
   const [commentWithAuthors, setCommentWithAuthors] = useState([]);
@@ -54,19 +54,16 @@ const MovieRate = (movieAffiche) => {
     };
     fetchUserNames();
   }, [comment]);
+  
   return (
     <div className="movie_rate_container">
+      <h5>{title}</h5>
       <div className="rate_img_container">
-      <img src={ movieAffiche.movieAffiche } alt="Affiche du film" />
+        <img src={movieAffiche} alt="Affiche du film" />
       </div>
       <div className="rate_star_container">
         {note !== undefined ? (
-          <Rating
-            name="half-rating-read"
-            value={note}
-            precision={0.5}
-            readOnly
-          />
+          <Rating name="half-rating-read" value={note} precision={0.5} readOnly />
         ) : (
           <p>Chargement de la note...</p>
         )}
@@ -81,7 +78,7 @@ const MovieRate = (movieAffiche) => {
             />
           ))
         ) : (
-          <p>Chargement des commentaire...</p>
+          <p>Chargement des commentaires...</p>
         )}
       </div>
     </div>

@@ -1,38 +1,46 @@
 import React, { useState } from "react";
-import HeaderMessage from "../components/Static/HeaderMessage";
 import MovieRate from "../components/Movie/MovieRate";
+import SearchBar from "../components/Static/SearchBar";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { getMovieById } from "../service/apiService";
+import Loader from "../components/Static/Loader";
 
 const Rating_Movie = () => {
-  const [movieInfo, setMovieInfo] = useState(null);
+  const [affiche, setAffiche] = useState(null);
+  const [title, setTitle] = useState(null);
   const { movieId } = useParams();
-  const movieAffiche = movieInfo ? movieInfo.image : "URL_DE_REMPLISSAGE";
-
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getMovieById(movieId)
       .then((response) => {
         if (response.error) {
-          console.log(
-            "Erreur lors de la récupération des informations du film"
-          );
+          console.log("Erreur lors de la récupération des informations du film");
         } else {
-          setMovieInfo(response);
+          setAffiche(response.image);
+          setTitle(response.titre);
+          setIsLoading(false);
         }
       })
       .catch((error) => {
         console.error(error);
+        setIsLoading(false);
       });
   }, [movieId]);
 
   return (
     <div>
-      <HeaderMessage title={movieInfo ? movieInfo.titre : "Titre inconnu"} />
-      <MovieRate
-        movieAffiche={movieAffiche}
-      />
+      <SearchBar />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        (affiche && title) ? (
+          <MovieRate movieAffiche={affiche} title={title} />
+        ) : (
+          <p>Les informations du film ne sont pas disponibles.</p>
+        )
+      )}
     </div>
   );
 };

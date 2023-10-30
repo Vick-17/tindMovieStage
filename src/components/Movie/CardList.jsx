@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -11,8 +11,12 @@ import Typography from '@mui/material/Typography';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import StarIcon from "@mui/icons-material/Star";
+import { swipeLike } from "../../service/apiService";
 
-const CardList = (title, subheader, image, content) => {
+const CardList = ({ title, subheader, image, content, actor, movieId, userId }) => {
+    const [ isLiked, setIsLiked ] = useState(false);
+
     const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
         return <IconButton {...other} />;
@@ -29,6 +33,26 @@ const CardList = (title, subheader, image, content) => {
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+    const handleStarIconClick = () => {
+        if (movieId) {
+            window.location.href = `/commentaire/${movieId}`;
+        }
+    };
+
+    const like = async (swipeDirection) => {
+        if (userId) {
+            const likeData = {
+                userId: userId,
+                filmId: movieId,
+                swipeDirection: swipeDirection
+            };
+            setIsLiked(true)
+            await swipeLike(likeData);
+        } else {
+            window.location.href = `/login`;
+        }
+    };
+
     return (
         <Card className='all_movie_card' >
             <CardHeader
@@ -43,15 +67,20 @@ const CardList = (title, subheader, image, content) => {
             />
             <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                    Christopher Nolan
+                    {actor}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="add to favorites">
+                <IconButton onClick={() => like('right')}>
                     <FavoriteIcon />
                 </IconButton>
-                <IconButton aria-label="share">
+                <IconButton onClick={() => like('left')}>
                     <CancelOutlinedIcon />
+                </IconButton>
+                <IconButton onClick={handleStarIconClick}>
+                    <StarIcon
+                        style={{ color: "#FFAC33" }}
+                    />
                 </IconButton>
                 <ExpandMore
                     expand={expanded}
@@ -66,7 +95,7 @@ const CardList = (title, subheader, image, content) => {
                 <CardContent>
                     <Typography paragraph>Synopsis:</Typography>
                     <Typography paragraph>
-                       {content}
+                        {content}
                     </Typography>
                     <Typography>
                         Set aside off of the heat to let rest for 10 minutes, and then serve.
