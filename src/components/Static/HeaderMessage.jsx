@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import { useUserData } from "../../service/userService";
+import { getPartenaire } from "../../service/apiService"
 
 const HeaderMessage = ({ title }) => {
   const location = useLocation();
   const isMoviePage = location.pathname.includes("/commentaire/");
-  
+  const { userId } = useUserData();
+  const [partenaireUsername, setPartenaireUsername] = useState("");
+  useEffect(() => {
+    const fetchData = async () => {
+      if (userId) {
+        try {
+          setPartenaireUsername(await getPartenaire(userId));
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [userId]);
+
   return (
     <div className="header_message">
       <div className="svg_return">
@@ -29,7 +46,7 @@ const HeaderMessage = ({ title }) => {
         </a>
       </div>
       <div className="user_message_name">
-        <h5>{isMoviePage ? title : "Nom d'utilisateur"}</h5>
+        <h5>{isMoviePage ? title : partenaireUsername}</h5>
       </div>
     </div>
   );

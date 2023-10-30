@@ -1,0 +1,7 @@
+.all_movie_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}

@@ -152,6 +152,20 @@ export const getCommentForMovie = async (movieId) => {
   }
 };
 
+export const getPartenaire = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/users/${userId}/partenaire`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des commentaires");
+    }
+    const responseText = await response.text();
+    return responseText;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const userSignIn = async (userData) => {
   try {
     const response = await fetch(`${API_URL}/users/inscription`, {

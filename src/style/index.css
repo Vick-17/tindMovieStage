@@ -13,3 +13,5 @@
 @import './components/Playlist.css';
 @import './components/Modal.css';
 @import './components/Loader.css';
+@import './components/CardList.css';
+@import './page/Home.css';
