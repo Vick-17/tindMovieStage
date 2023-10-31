@@ -14,17 +14,53 @@ export const getAllMovieByUser = async (userId) => {
   }
 };
 
-export const getRecommendationByuser = async (userId) => {
-try {
-  const response = await fetch(`${API_URL}/movie/recommendation/${userId}`);
-  if (!response.ok) {
-    throw new Error("Erreur lors de la récupération des films recommeder");
+export const getAllActor = async () => {
+  try {
+    const response = await fetch(`${API_URL}/actors/allActor`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des acteurs")
+    }
+    return await response.json();
+  } catch (e) {
+    throw e;
   }
-  const data = await response.json();
-  return data;
-} catch (error) {
-  
-}
+};
+
+export const getAllReal = async () => {
+  try {
+    const response = await fetch(`${API_URL}/realisator/allRealisator`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des Real")
+    }
+    return await response.json();
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getAllGenre = async () => {
+  try {
+    const response = await fetch(`${API_URL}/genre/allGenre`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des Genres")
+    }
+    return await response.json();
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const getRecommendationByuser = async (userId) => {
+  try {
+    const response = await fetch(`${API_URL}/movie/recommendation/${userId}`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des films recommeder");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+
+  }
 };
 
 export const getLinkedUsername = async (userId) => {
@@ -132,7 +168,7 @@ export const getNotMoyenne = async (movieId) => {
       throw new Error("Erreur lors de la recupération de la moyenne")
     }
     return await response.json();
-    
+
   } catch (error) {
     console.error(error);
     throw error;
@@ -292,7 +328,7 @@ export const userLogiIn = async (userData) => {
     });
     if (response.status !== 202) {
       throw new Error("Erreur lors de la connexion");
-      
+
     } else {
       const token = response.headers.get("access_token");
       localStorage.setItem("userToken", token);

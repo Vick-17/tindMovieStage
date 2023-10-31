@@ -20,7 +20,7 @@ import java.util.List;
 public class ActorController {
 
     private final ActorService actorService;
-    private ActorRepository actorRepository;
+    private final ActorRepository actorRepository;
 
     /**
      * Constructeur du contrôleur ActorController.
@@ -28,8 +28,9 @@ public class ActorController {
      * @param actorService Le service des acteurs qui sera injecté automatiquement par Spring.
      */
     @Autowired
-    public ActorController(ActorService actorService) {
+    public ActorController(ActorService actorService, ActorRepository actorRepository) {
         this.actorService = actorService;
+        this.actorRepository = actorRepository;
     }
 
     /**

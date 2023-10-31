@@ -47,6 +47,8 @@ public class SecurityConfig {
           .permitAll()
           .requestMatchers(HttpMethod.GET, "/movie/**")
           .permitAll()
+          .requestMatchers(HttpMethod.GET, "/genre/**")
+          .permitAll()
           .requestMatchers(HttpMethod.GET, "/realisator/**")
           .permitAll()
           .requestMatchers(HttpMethod.GET, "/actors/**")

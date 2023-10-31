@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardHeader from '@mui/material/CardHeader';
@@ -14,8 +14,7 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import StarIcon from "@mui/icons-material/Star";
 import { swipeLike } from "../../service/apiService";
 
-const CardList = ({ title, subheader, image, content, actor, movieId, userId }) => {
-    const [ isLiked, setIsLiked ] = useState(false);
+const CardList = ({ title, subheader, image, content, actor, movieId, userId, onRemove }) => {
 
     const ExpandMore = styled((props) => {
         const { expand, ...other } = props;
@@ -46,12 +45,23 @@ const CardList = ({ title, subheader, image, content, actor, movieId, userId }) 
                 filmId: movieId,
                 swipeDirection: swipeDirection
             };
-            setIsLiked(true)
+            setShouldRemove(true);
             await swipeLike(likeData);
         } else {
             window.location.href = `/login`;
         }
     };
+
+    // Utilisez une variable d'état locale pour contrôler si le film doit être supprimé
+    const [shouldRemove, setShouldRemove] = useState(false);
+
+    // Si shouldRemove devient true, appelez onRemove(movieId) et réinitialisez l'état local
+    useEffect(() => {
+        if (shouldRemove) {
+            onRemove(movieId);
+            setShouldRemove(false); // Réinitialisez l'état local
+        }
+    }, [shouldRemove, movieId, onRemove]);
 
     return (
         <Card className='all_movie_card' >

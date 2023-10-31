@@ -1,0 +1,18 @@
+.filter_container {
+    background-color: #fff;
+    width: 90%;
+    margin: 10px auto;
+    height: 3.5em;
+    border-radius: 6px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.filter_select {
+    height: 2.5em;
+    margin: 5px;
+    border: none;
+}
+
