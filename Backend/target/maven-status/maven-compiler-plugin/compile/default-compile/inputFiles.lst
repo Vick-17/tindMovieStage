@@ -27,6 +27,7 @@
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/ActorService.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/Views.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/MovieActorEntity.java
+/com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Controller/GenreController.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/SwipeRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/UserLoginRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/GenreRepository.java

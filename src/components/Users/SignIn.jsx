@@ -69,7 +69,7 @@ export default function SignUp() {
 
       try {
         const response = await userSignIn(formData);
-        if (response.ok)
+        if (response.created)
           toast.success("Inscription reussi")
         else {
           toast.error("Erreur de serveur reassayer plus tard")
