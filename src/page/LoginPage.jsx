@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "../components/Static/header";
+import Header from "../components/Static/SearchBar";
 import Login from "../components/Users/Login";
 import SignIn from "../components/Users/SignIn";
 import Link from "@mui/material/Link";

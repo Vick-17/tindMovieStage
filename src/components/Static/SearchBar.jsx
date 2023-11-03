@@ -16,6 +16,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useUserData } from "../../service/userService";
 
+
 const SearchBar = () => {
     const { userRole } = useUserData();
 
