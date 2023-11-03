@@ -14,8 +14,26 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { useUserData } from "../../service/userService";
 
 const SearchBar = () => {
+    const { userRole } = useUserData();
+
+    const handleLogout = () => {
+        // Supprimer le token du local storage
+        localStorage.removeItem("userToken");
+
+        // Rediriger l'utilisateur vers la page de connexion
+        window.location.href = "/";
+    };
+
+    const handleLogin = () => {
+        window.location.href = "/login";
+    }
+
+    const handleHome = () => {
+        window.location.href = "/";
+    }
 
     const Search = styled('div')(({ theme }) => ({
         position: 'relative',
@@ -56,7 +74,6 @@ const SearchBar = () => {
             },
         },
     }));
-
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -74,12 +91,19 @@ const SearchBar = () => {
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
-        window.location.href = `/profil`;
     };
 
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+
+    const goToProfil = () => {
+        if (userRole.length !== 0 ) {
+           window.location.href = `/profil`; 
+        } else {
+            window.location.href = `/login`; 
+        }
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -98,8 +122,16 @@ const SearchBar = () => {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>Mon compte</MenuItem>
+            <MenuItem onClick={goToProfil}>Profile</MenuItem>
+            {userRole.includes("ROLE_USER") || userRole.includes("ROLE_ADMIN") ? (
+                <MenuItem onClick={handleLogout}>
+                    Déconnexion
+                </ MenuItem >
+            ) : (
+                <MenuItem onClick={handleLogin} >
+                    Connexion
+                </MenuItem>
+            )}
         </Menu>
     );
 
@@ -163,7 +195,9 @@ const SearchBar = () => {
                         variant="h6"
                         noWrap
                         component="div"
+                        style={{cursor:'pointer'}}
                         sx={{ display: { xs: 'none', sm: 'block' } }}
+                        onClick={handleHome}
                     >
                         TindMovie
                     </Typography>

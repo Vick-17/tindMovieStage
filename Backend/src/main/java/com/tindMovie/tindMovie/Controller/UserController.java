@@ -93,6 +93,12 @@ public class UserController {
   @PostMapping(value = "/inscription", consumes = "application/json")
   @ResponseStatus(HttpStatus.CREATED)
   public UsersEntity createUser(@RequestBody UsersEntity users) {
+        // Vérifier si l'e-mail est déjà utilisé
+    UsersEntity existingUser = userRepository.findByEmail(users.getEmail());
+    if (existingUser != null) {
+        // L'e-mail est déjà utilisé, renvoyer une erreur
+        throw new RuntimeException("L'adresse e-mail est déjà utilisée.");
+    }
     String shareCode = userService.generateRandomCode(5);
     BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
     String passwordEncode = bCryptPasswordEncoder.encode(users.getPassword());

@@ -37,8 +37,6 @@ export default function SignUp() {
     const usernameValue = data.get("username");
     const emailValue = data.get("email");
     const passwordValue = data.get("password");
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (
@@ -49,13 +47,13 @@ export default function SignUp() {
       toast.error("Champ vide");
     } else if (!emailRegex.test(emailValue) || emailValue === "") {
       toast.error("Email non valide");
-    } else if (
-      passwordValue.length <= 8 &&
-      !passwordRegex.test(passwordValue) &&
-      passwordValue === ""
-    ) {
+    } else if (!(passwordValue.length >= 12 &&
+      /[A-Z]/.test(passwordValue) &&
+      /\d/.test(passwordValue) &&
+      /[@$!%*?&]/.test(passwordValue) &&
+      !/^\s*$/.test(passwordValue))) {
       toast.error(
-        "Le mot de passe doit comporter au moins 8 caractères et 1 caractère spécial, 1 chiffre, 1 majuscule."
+        "Le mot de passe doit comporter au moins 12 caractères et 1 caractère spécial, 1 chiffre, 1 majuscule."
       );
     } else {
       const formData = {
@@ -68,13 +66,10 @@ export default function SignUp() {
       };
 
       try {
-        const response = await userSignIn(formData);
-        if (response.created)
-          toast.success("Inscription reussi")
-        else {
-          toast.error("Erreur de serveur reassayer plus tard")
-        }
+        await userSignIn(formData);
+        toast.success("Inscription reussi")
       } catch (error) {
+        toast.error("L'email existe déjà dans la base de données")
         console.error(error);
       }
     }

@@ -211,7 +211,7 @@ export const userSignIn = async (userData) => {
       },
       body: JSON.stringify(userData),
     });
-    if (!response.ok) {
+    if (response.status !== 201) {
       throw new Error("Erreur lors de l'inscription");
     }
     const data = await response.json();
