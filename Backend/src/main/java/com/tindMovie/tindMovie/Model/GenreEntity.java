@@ -3,8 +3,12 @@ package com.tindMovie.tindMovie.Model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "genre")
 public class GenreEntity {
     @Id
@@ -16,29 +20,4 @@ public class GenreEntity {
 
     @Column(name = "movie_ids")
     private Long[] movieIds;
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNomGenre() {
-        return this.nomGenre;
-    }
-
-    public void setNomGenre(String nomGenre) {
-        this.nomGenre = nomGenre;
-    }
-
-    public Long[] getMovieIds() {
-        return this.movieIds;
-    }
-
-    public void setMovieIds(Long[] movieIds) {
-        this.movieIds = movieIds;
-    }
-
 }

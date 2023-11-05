@@ -1,10 +1,14 @@
 package com.tindMovie.tindMovie.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "movie")
 public class MovieEntity {
 
@@ -24,67 +28,4 @@ public class MovieEntity {
     @Column(name = "commentaire_id")
     private Long commentaireId;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    public String getDates() {
-        return dates;
-    }
-
-    public void setDates(String dates) {
-        this.dates = dates;
-    }
-
-    public String getDurée() {
-        return duree;
-    }
-
-    public void setDurée(String durée) {
-        this.duree = durée;
-    }
-
-    public Integer getNoteMoyenne() {
-        return noteMoyenne;
-    }
-
-    public void setNoteMoyenne(Integer noteMoyenne) {
-        this.noteMoyenne = noteMoyenne;
-    }
-
-    public Long getCommentaireId() {
-        return commentaireId;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
-
-    public void setCommentaireId(Long commentaireId) {
-        this.commentaireId = commentaireId;
-    }
-
-    public String getSynopsis() {
-        return synopsis;
-    }
-
-    public void setSynopsis(String synopsis) {
-        this.synopsis = synopsis;
-    }
 }

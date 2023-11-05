@@ -7,8 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "movie_actor")
 public class MovieActorEntity {
     @Id
@@ -22,31 +26,6 @@ public class MovieActorEntity {
     @ManyToOne
     @JoinColumn(name = "actor_id")
     private ActorEntity actor;
-
-
-    public Long getId() {
-        return this.id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public MovieEntity getMovie() {
-        return this.movie;
-    }
-
-    public void setMovie(MovieEntity movie) {
-        this.movie = movie;
-    }
-
-    public ActorEntity getActor() {
-        return this.actor;
-    }
-
-    public void setActor(ActorEntity actor) {
-        this.actor = actor;
-    }
     
 }
 

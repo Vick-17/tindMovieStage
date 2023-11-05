@@ -11,4 +11,6 @@ import java.util.List;
 public interface MovieRepository extends CrudRepository<MovieEntity, Long> {
 
     List<MovieEntity> findByIdIn(@Param("filmIds") List<Long> likedFilmIds);
+
+    List<MovieEntity> findByTitreContainingIgnoreCase(String searchTerm);
 }

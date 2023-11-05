@@ -1,8 +1,12 @@
 package com.tindMovie.tindMovie.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "badge")
 public class BadgeEntity {
     @Id

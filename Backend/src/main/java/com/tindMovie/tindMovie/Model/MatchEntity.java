@@ -1,8 +1,12 @@
 package com.tindMovie.tindMovie.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "match") // Assurez-vous que le nom de la table correspond à votre schéma de base de données
 public class MatchEntity {
     @Id
@@ -17,40 +21,5 @@ public class MatchEntity {
 
     @Column(name = "film_id")
     private Long filmId;
-
-    // Ajoutez d'autres champs si nécessaire
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId1() {
-        return userId1;
-    }
-
-    public void setUserId1(Long userId1) {
-        this.userId1 = userId1;
-    }
-
-    public Long getUserId2() {
-        return userId2;
-    }
-
-    public void setUserId2(Long userId2) {
-        this.userId2 = userId2;
-    }
-
-    public Long getFilmId() {
-        return filmId;
-    }
-
-    public void setFilmId(Long filmId) {
-        this.filmId = filmId;
-    }
-
 
 }

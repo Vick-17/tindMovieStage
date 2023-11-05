@@ -2,8 +2,12 @@ package com.tindMovie.tindMovie.Model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "realisator")
 public class RealisatorEntity {
 
@@ -17,27 +21,4 @@ public class RealisatorEntity {
     @Column(name = "movie_ids")
     private Long[] movieIds;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getRealisatorName() {
-        return realisatorName;
-    }
-
-    public void setRealisatorName(String realisatorName) {
-        this.realisatorName = realisatorName;
-    }
-
-    public Long[] getMovieIds() {
-        return movieIds;
-    }
-
-    public void setMovieIds(Long[] movieIds) {
-        this.movieIds = movieIds;
-    }
 }

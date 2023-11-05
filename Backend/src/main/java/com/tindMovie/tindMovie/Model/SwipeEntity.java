@@ -1,8 +1,12 @@
 package com.tindMovie.tindMovie.Model;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "swipe")
 public class SwipeEntity {
     @Id
@@ -27,60 +31,4 @@ public class SwipeEntity {
     @Column(name = "is_watched")
     private boolean isWatched;
 
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
-
-    public Long getFilmId() {
-        return filmId;
-    }
-
-    public void setFilmId(Long filmId) {
-        this.filmId = filmId;
-    }
-
-    public boolean isLiked() {
-        return liked;
-    }
-
-    public void setLiked(boolean liked) {
-        this.liked = liked;
-    }
-
-    public boolean isNotLiked() {
-        return notLiked;
-    }
-
-    public void setNotLiked(boolean notLiked) {
-        this.notLiked = notLiked;
-    }
-
-    public String getSwipeDirection() {
-        return swipeDirection;
-    }
-
-    public void setSwipeDirection(String swipeDirection) {
-        this.swipeDirection = swipeDirection;
-    }
-
-    public boolean isWatched() {
-        return isWatched;
-    }
-
-    public void setWatched(boolean watched) {
-        isWatched = watched;
-    }
 }

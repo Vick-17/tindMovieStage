@@ -9,12 +9,15 @@ import com.tindMovie.tindMovie.Repository.NoteRepository;
 import com.tindMovie.tindMovie.Repository.SwipeRepository;
 import com.tindMovie.tindMovie.Service.ActorService;
 import com.tindMovie.tindMovie.Service.AlgoService;
+import com.tindMovie.tindMovie.Service.MovieSearchService;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
@@ -36,6 +39,9 @@ public class MovieController {
 
   @Autowired
   private NoteRepository noteRepository;
+
+  @Autowired
+  private MovieSearchService movieSearchService;
 
   @CrossOrigin
   @GetMapping(value = "/allMovies")
@@ -119,4 +125,11 @@ public class MovieController {
     // Retourner la liste de films recommandés
     return recommendedMovies;
   }
+
+  @GetMapping("/search")
+  public ResponseEntity<List<MovieEntity>> searchMovies(@RequestParam("query") String searchTerm) {
+    List<MovieEntity> results = movieSearchService.searchMovies(searchTerm);
+    return ResponseEntity.ok(results);
+  }
+
 }
