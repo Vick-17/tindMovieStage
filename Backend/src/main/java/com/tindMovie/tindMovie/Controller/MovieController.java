@@ -131,5 +131,4 @@ public class MovieController {
     List<MovieEntity> results = movieSearchService.searchMovies(searchTerm);
     return ResponseEntity.ok(results);
   }
-
 }

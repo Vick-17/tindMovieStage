@@ -15,10 +15,21 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { useUserData } from "../../service/userService";
+import TextField from "@mui/material/TextField";
 
 
 const SearchBar = () => {
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+    const isMenuOpen = Boolean(anchorEl);
+    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
     const { userRole } = useUserData();
+    const [searchTerm, setSearchTerm] = React.useState('');
+
+    const handleSearchChange = (event) => {
+        const newSearchTerm = event.target.value;
+        setSearchTerm(newSearchTerm);
+    }
 
     const handleLogout = () => {
         // Supprimer le token du local storage
@@ -75,11 +86,6 @@ const SearchBar = () => {
             },
         },
     }));
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-
-    const isMenuOpen = Boolean(anchorEl);
-    const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
     const handleProfileMenuOpen = (event) => {
         setAnchorEl(event.currentTarget);
@@ -99,13 +105,14 @@ const SearchBar = () => {
     };
 
     const goToProfil = () => {
-        if (userRole.length !== 0 ) {
-           window.location.href = `/profil`; 
+        if (userRole.length !== 0) {
+            window.location.href = `/profil`;
         } else {
-            window.location.href = `/login`; 
+            window.location.href = `/login`;
         }
     }
 
+    console.log(searchTerm);
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
         <Menu
@@ -196,21 +203,19 @@ const SearchBar = () => {
                         variant="h6"
                         noWrap
                         component="div"
-                        style={{cursor:'pointer'}}
+                        style={{ cursor: 'pointer' }}
                         sx={{ display: { xs: 'none', sm: 'block' } }}
                         onClick={handleHome}
                     >
                         TindMovie
                     </Typography>
-                    <Search>
-                        <SearchIconWrapper>
+                    <div className='inputSearch'>
                             <SearchIcon />
-                        </SearchIconWrapper>
-                        <StyledInputBase
+                        <TextField
+                            onChange={handleSearchChange}
                             placeholder="Chercher un film"
-                            inputProps={{ 'aria-label': 'search' }}
                         />
-                    </Search>
+                    </div>
                     <Box sx={{ flexGrow: 1 }} />
                     <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                         <IconButton size="large" aria-label="show 4 new mails" color="inherit">

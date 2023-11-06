@@ -362,3 +362,7 @@ export const deleteSwipe = async (swipeData) => {
     console.error("Erreur lors de la suppresion des article :", error);
   }
 };
+
+export const searchMovie = async (query) => {
+  
+}
