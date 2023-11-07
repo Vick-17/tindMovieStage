@@ -8,6 +8,7 @@
     justify-content: space-around;
     align-items: center;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+
 }
 
 .filter_select {
@@ -16,3 +17,13 @@
     border: none;
 }
 
+@media (max-width: 870px) {
+    .filter_container {
+        width: 100%;
+        margin: 5px;
+        height: 5em;
+        text-align: center;
+        overflow-x: scroll;
+        justify-content: flex-start;
+    }
+}

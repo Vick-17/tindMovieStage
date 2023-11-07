@@ -9,7 +9,20 @@ import FilterBar from '../components/Static/FilterBar';
 const Home = () => {
     const [movies, setMovies] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [searchResults, setSearchResults] = useState([]);
+    const [filterResults, setFilterResults] = useState([]);
     const { userId } = useUserData();
+    const [displayMode, setDisplayMode] = useState("all");
+
+    const updateSearchResults = (results) => {
+        setSearchResults(results);
+        setDisplayMode("search");
+    }
+
+    const updateFilter = (resultsFilter) => {
+        setFilterResults(resultsFilter);
+        setDisplayMode("filter");
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,34 +46,41 @@ const Home = () => {
     }, [userId]);
 
     const removeMovieFromList = (movieId) => {
-        // Utilisez une fonction pour mettre à jour l'état
         setMovies((prevMovies) => {
             return prevMovies.filter((movie) => movie.id !== movieId);
         });
     };
 
+    let displayMovies = [];
+
+    if (displayMode === "search" && searchResults.length > 0) {
+        displayMovies = searchResults;
+    } else if (displayMode === "filter" && filterResults.length > 0) {
+        displayMovies = filterResults;
+    } else {
+        displayMovies = movies;
+    }
+
     return (
         <>
-            <SearchBar />
-            <FilterBar />
+            <SearchBar updateSearchResults={updateSearchResults} />
+            <FilterBar updateFilter={updateFilter} />
             <div className="all_movie_container">
                 {isLoading ? (
                     <Loader />
                 ) : (
-                    <>
-                        {movies.map((movie, index) => (
-                            <CardList
-                                key={index}
-                                title={movie.titre}
-                                image={movie.image}
-                                content={movie.synopsis}
-                                subheader={movie.dates}
-                                movieId={movie.id}
-                                userId={userId}
-                                onRemove={(movieId) => removeMovieFromList(movieId)}
-                            />
-                        ))}
-                    </>
+                    displayMovies.map((movie, index) => (
+                        <CardList
+                            key={index}
+                            title={movie.titre}
+                            image={movie.image}
+                            content={movie.synopsis}
+                            subheader={movie.dates}
+                            movieId={movie.id}
+                            userId={userId}
+                            onRemove={(movieId) => removeMovieFromList(movieId)}
+                        />
+                    ))
                 )}
             </div>
         </>

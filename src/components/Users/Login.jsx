@@ -38,7 +38,7 @@ export default function SignIn() {
       await userLogiIn(formData);
     } catch (error) {
       console.error(error);
-      toast.error("Une erreur s'est produite lors de la connexion.");
+      toast.error("Les identifications sont erronées");
     }
   };
 

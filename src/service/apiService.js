@@ -202,6 +202,32 @@ export const getPartenaire = async (userId) => {
   }
 };
 
+export const searchMovie = async (query) => {
+  try {
+    const response = await fetch(`${API_URL}/movie/search?query=${query}`);
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des films");
+    }
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+export const genreFilter = async (genreId) => {
+  try {
+    const response = await fetch(`${API_URL}/genre/moviesByGenre?genreId=${genreId}`)
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des films")
+    }
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 export const userSignIn = async (userData) => {
   try {
     const response = await fetch(`${API_URL}/users/inscription`, {

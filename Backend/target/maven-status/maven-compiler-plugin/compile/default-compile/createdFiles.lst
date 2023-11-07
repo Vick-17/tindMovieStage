@@ -1,9 +1,9 @@
-com/tindMovie/tindMovie/Repository/MessageRepository.class
 com/tindMovie/tindMovie/Service/RealisatorService.class
 com/tindMovie/tindMovie/WebSocket/WebSocketConfig.class
+com/tindMovie/tindMovie/Repository/MessageRepository.class
 com/tindMovie/tindMovie/Repository/CommentaireRepository.class
-com/tindMovie/tindMovie/Controller/ActorController.class
 com/tindMovie/tindMovie/Security/CustomAuthenticationFilter.class
+com/tindMovie/tindMovie/Controller/ActorController.class
 com/tindMovie/tindMovie/Repository/GenreRepository.class
 com/tindMovie/tindMovie/Model/RoleEntity.class
 com/tindMovie/tindMovie/Repository/UserRoleRepository.class
@@ -33,8 +33,8 @@ com/tindMovie/tindMovie/Controller/MovieController.class
 com/tindMovie/tindMovie/Service/RecommendService.class
 com/tindMovie/tindMovie/Repository/MatchRepository.class
 com/tindMovie/tindMovie/Controller/RealisatorController.class
-com/tindMovie/tindMovie/Controller/NoteController.class
 com/tindMovie/tindMovie/Service/ResourceNotFoundException.class
+com/tindMovie/tindMovie/Controller/NoteController.class
 com/tindMovie/tindMovie/Model/MovieActorEntity.class
 com/tindMovie/tindMovie/Security/JwtUtils.class
 com/tindMovie/tindMovie/Service/UserService.class
@@ -47,8 +47,8 @@ com/tindMovie/tindMovie/Service/MovieSearchService.class
 com/tindMovie/tindMovie/TindMovieApplication.class
 com/tindMovie/tindMovie/ServletInitializer.class
 com/tindMovie/tindMovie/Model/Status.class
-com/tindMovie/tindMovie/Model/NotificationEntity.class
 com/tindMovie/tindMovie/Service/ActorService.class
+com/tindMovie/tindMovie/Model/NotificationEntity.class
 com/tindMovie/tindMovie/Repository/UserLoginRepository.class
 com/tindMovie/tindMovie/Model/ActorEntity.class
 com/tindMovie/tindMovie/Repository/NoteRepository.class

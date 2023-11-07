@@ -11,7 +11,7 @@ import FullscreenIcon from "@mui/icons-material/Fullscreen";
 import Loader from "../Static/Loader";
 
 const UserPlaylist = () => {
-  const { userId } = useUserData();
+  const { userId, userRole } = useUserData();
   const [swipe, setSwipe] = useState([]);
   const [recommendMovies, setRecommendMovies] = useState([])
   const [watchedMovies, setWatchedMovies] = useState([]);
@@ -23,7 +23,7 @@ const UserPlaylist = () => {
       // userId n'est pas encore défini, ne rien faire
       return;
     }
-
+    console.log(userRole);
     getSwipeByUserId(userId)
       .then((response) => {
         setSwipe(response);

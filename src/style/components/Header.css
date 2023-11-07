@@ -1,6 +1,8 @@
-header {
-  width: 100%;
+.inputSearch {
   display: flex;
-  justify-content: space-between;
-  padding: 30px 50px 15px 50px;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  color: #fff;
 }
+

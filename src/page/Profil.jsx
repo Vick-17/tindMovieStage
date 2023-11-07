@@ -1,12 +1,12 @@
 import React from "react";
 import HeaderProfil from "../components/Users/HeaderProfil";
-import Header from "../components/Static/header";
+import SearchBar from "../components/Static/SearchBar";
 import UserPlaylist from "../components/Users/userPlaylist";
 
 const Profil = () => {
   return (
     <>
-      <Header />
+      <SearchBar />
       <HeaderProfil />
       <UserPlaylist />
     </>

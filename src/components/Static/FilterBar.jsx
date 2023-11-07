@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { getAllActor, getAllReal, getAllGenre } from '../../service/apiService';
+import { getAllActor, getAllReal, getAllGenre, genreFilter } from '../../service/apiService';
 
-
-const FilterBar = () => {
-    const [ actors, setActors ] = useState([]);
+const FilterBar = ({ updateFilter }) => {
+    const [actors, setActors] = useState([]);
     const [realisators, setRealisators] = useState([]);
-    const [ genres , setGenres ] = useState([]);
+    const [genres, setGenres] = useState([]);
+    const [selectedGenre, setSelectedGenre] = useState("all"); // State pour stocker le genre sélectionné
 
     useEffect(() => {
         const fetchData = async () => {
@@ -18,23 +18,40 @@ const FilterBar = () => {
                 setActors(actorResponse);
                 setRealisators(realResponse);
                 setGenres(genreResponse)
-            } catch (e) {   
+            } catch (e) {
                 console.error("Une erreur s'est produite : ", e);
             }
         };
         fetchData();
-    }, [])
-    
+    }, []);
+
+    const getMovieByFilter = async (genreId) => {
+        try {
+            const genreFilterResponse = await genreFilter(genreId);
+            updateFilter(genreFilterResponse);
+        } catch (e) {
+            console.error("Une erreur s'est produite : ", e);
+        }
+    }
+
+    // Gestionnaire d'événements pour le changement de sélection de genre
+    const handleGenreChange = (event) => {
+        const selectedGenreId = event.target.value;
+        setSelectedGenre(selectedGenreId);
+        if (selectedGenreId !== "all") {
+            getMovieByFilter(selectedGenreId);
+        }
+    }
+
     return (
         <div className='filter_container'>
             <label>
                 Genre:
-                <select className='filter_select'>
+                <select className='filter_select' value={selectedGenre} onChange={handleGenreChange}>
                     <option value="all">Tous les genres</option>
                     {genres.map((genre, index) => (
                         <option key={index} value={genre.id}> {genre.nomGenre} </option>
                     ))}
-                    {/* Ajoutez d'autres genres au besoin */}
                 </select>
             </label>
 
@@ -56,7 +73,7 @@ const FilterBar = () => {
                     ))}
                 </select>
             </label>
-            <Stack spacing={1}> 
+            <Stack spacing={1}>
                 <Rating name="half-rating" defaultValue={2.5} precision={0.5} />
             </Stack>
         </div>
@@ -64,3 +81,4 @@ const FilterBar = () => {
 };
 
 export default FilterBar;
+
