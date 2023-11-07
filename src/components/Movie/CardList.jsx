@@ -27,16 +27,18 @@ const CardList = ({ title, subheader, image, content, actor, movieId, userId, on
         }),
     }));
 
-    const [expanded, setExpanded] = React.useState(false);
+    const [expanded, setExpanded] = useState(false);
 
     const handleExpandClick = () => {
         setExpanded(!expanded);
     };
+
     const handleStarIconClick = () => {
         if (movieId) {
             window.location.href = `/commentaire/${movieId}`;
         }
     };
+
 
     const like = async (swipeDirection) => {
         if (userId) {
@@ -59,7 +61,7 @@ const CardList = ({ title, subheader, image, content, actor, movieId, userId, on
     useEffect(() => {
         if (shouldRemove) {
             onRemove(movieId);
-            setShouldRemove(false); // Réinitialisez l'état local
+            setShouldRemove(false);
         }
     }, [shouldRemove, movieId, onRemove]);
 
