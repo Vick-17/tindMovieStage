@@ -1,5 +1,6 @@
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Controller/CommentaireController.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/RoleEntity.java
+/com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/FileService/StorageException.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/MovieEntity.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/NoteRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/RealisatorService.java
@@ -17,6 +18,7 @@
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/SwipeEntity.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/ActorEntity.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/WebSocket/WebSocketConfig.java
+/com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/FileService/FileStorageService.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/RealisatorEntity.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/UserService.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/Status.java
@@ -30,10 +32,12 @@
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/UserLoginRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/GenreRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Security/SecurityConfig.java
+/com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/FileService/FileStorageProperties.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/TindMovieApplication.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Model/NoteEntity.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Controller/SwipeController.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/ResourceNotFoundException.java
+/com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Service/MovieSearchService.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Repository/RealisatorRepository.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Security/CustomAuthenticationFilter.java
 /com.docker.devenvironments.code/Backend/src/main/java/com/tindMovie/tindMovie/Controller/ChatController.java
