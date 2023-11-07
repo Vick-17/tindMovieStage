@@ -39,7 +39,7 @@ public class RealisatorController {
         @GetMapping("/moviesByGenre")
     public List<MovieEntity> getMoviesForGenres(@RequestParam Long genreId) {
         // recheche du genre par l'id
-        GenreEntity genre = genreRepository.findById(genreId).orElse(null);
+        RealisatorEntity genre = realisatorRepository.findById(genreId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
         if (genre != null && genre.getMovieIds() != null && genre.getMovieIds().length > 0) {
@@ -47,7 +47,7 @@ public class RealisatorController {
             List<Long> movieIds = Arrays.asList(genre.getMovieIds());
 
             // Rechecher les films correspondants dans genre
-            return genreRepository.findMovieByGenre(movieIds);
+            return realisatorRepository.findMovieByRealisator(movieIds);
         } else {
             // Si l'acteur n'existe pas ou n'a pas de films, retourner une liste vide
             return Collections.emptyList();
