@@ -1,6 +1,5 @@
 package com.tindMovie.tindMovie.Controller;
 
-import com.tindMovie.tindMovie.Model.GenreEntity;
 import com.tindMovie.tindMovie.Model.MovieEntity;
 import com.tindMovie.tindMovie.Model.RealisatorEntity;
 import com.tindMovie.tindMovie.Repository.RealisatorRepository;
@@ -36,20 +35,20 @@ public class RealisatorController {
         return realisatorRepository.findAll();
     }
 
-        @GetMapping("/moviesByGenre")
-    public List<MovieEntity> getMoviesForGenres(@RequestParam Long genreId) {
+        @GetMapping("/moviesByRealisator")
+    public List<MovieEntity> getMoviesForReal(@RequestParam Long realisatorId) {
         // recheche du genre par l'id
-        RealisatorEntity genre = realisatorRepository.findById(genreId).orElse(null);
+        RealisatorEntity real = realisatorRepository.findById(realisatorId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
-        if (genre != null && genre.getMovieIds() != null && genre.getMovieIds().length > 0) {
+        if (real != null && real.getMovieIds() != null && real.getMovieIds().length > 0) {
             // Convertir les IDs de films une liste 
-            List<Long> movieIds = Arrays.asList(genre.getMovieIds());
+            List<Long> movieIds = Arrays.asList(real.getMovieIds());
 
-            // Rechecher les films correspondants dans genre
+            // Rechecher les films correspondants dans real
             return realisatorRepository.findMovieByRealisator(movieIds);
         } else {
-            // Si l'acteur n'existe pas ou n'a pas de films, retourner une liste vide
+            // Si le real n'existe pas ou n'a pas de films, retourner une liste vide
             return Collections.emptyList();
         }
     }

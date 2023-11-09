@@ -8,8 +8,8 @@ com/tindMovie/tindMovie/Repository/GenreRepository.class
 com/tindMovie/tindMovie/Model/RoleEntity.class
 com/tindMovie/tindMovie/Repository/UserRoleRepository.class
 com/tindMovie/tindMovie/Service/AlgoService.class
-com/tindMovie/tindMovie/Controller/UserController.class
 com/tindMovie/tindMovie/Security/SecurityConfig.class
+com/tindMovie/tindMovie/Controller/UserController.class
 com/tindMovie/tindMovie/Model/BadgeEntity.class
 com/tindMovie/tindMovie/Model/RealisatorEntity.class
 com/tindMovie/tindMovie/Model/MatchEntity.class

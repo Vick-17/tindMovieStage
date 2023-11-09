@@ -202,7 +202,7 @@ export const getPartenaire = async (userId) => {
   }
 };
 
-export const searchMovie = async (query) => {
+export const getSearchMovie = async (query) => {
   try {
     const response = await fetch(`${API_URL}/movie/search?query=${query}`);
     if (!response.ok) {
@@ -215,7 +215,7 @@ export const searchMovie = async (query) => {
   }
 }
 
-export const genreFilter = async (genreId) => {
+export const getGenreFilter = async (genreId) => {
   try {
     const response = await fetch(`${API_URL}/genre/moviesByGenre?genreId=${genreId}`)
     if (!response.ok) {
@@ -227,6 +227,33 @@ export const genreFilter = async (genreId) => {
     throw e;
   }
 }
+
+export const getRealisatorFilter = async (realisatorId) => {
+  try {
+    const response = await fetch(`${API_URL}/realisator/moviesByRealisator?realisatorId=${realisatorId}`)
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des films")
+    }
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
+export const getActorFilter = async (actorId) => {
+  try {
+    const response = await fetch(`${API_URL}/actors/actors?actorId=${actorId}`)
+    if (!response.ok) {
+      throw new Error("Erreur lors de la récupération des films")
+    }
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 
 export const userSignIn = async (userData) => {
   try {

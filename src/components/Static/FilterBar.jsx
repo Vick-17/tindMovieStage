@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
-import { getAllActor, getAllReal, getAllGenre, genreFilter } from '../../service/apiService';
+import { getAllActor, getAllReal, getAllGenre, getGenreFilter, getRealisatorFilter, getActorFilter } from '../../service/apiService';
 
 const FilterBar = ({ updateFilter }) => {
     const [actors, setActors] = useState([]);
     const [realisators, setRealisators] = useState([]);
     const [genres, setGenres] = useState([]);
-    const [selectedGenre, setSelectedGenre] = useState("all"); // State pour stocker le genre sélectionné
+    const [selectedGenre, setSelectedGenre] = useState("all");
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -27,7 +28,7 @@ const FilterBar = ({ updateFilter }) => {
 
     const getMovieByFilter = async (genreId) => {
         try {
-            const genreFilterResponse = await genreFilter(genreId);
+            const genreFilterResponse = await getGenreFilter(genreId);
             updateFilter(genreFilterResponse);
         } catch (e) {
             console.error("Une erreur s'est produite : ", e);
@@ -42,6 +43,8 @@ const FilterBar = ({ updateFilter }) => {
             getMovieByFilter(selectedGenreId);
         }
     }
+
+
 
     return (
         <div className='filter_container'>
