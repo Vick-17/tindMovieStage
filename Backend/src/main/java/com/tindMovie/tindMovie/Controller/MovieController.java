@@ -131,4 +131,10 @@ public class MovieController {
     List<MovieEntity> results = movieSearchService.searchMovies(searchTerm);
     return ResponseEntity.ok(results);
   }
+
+  @GetMapping("/byNote/{minNote}")
+    public ResponseEntity<List<MovieEntity>> getFilmsByNote(@PathVariable double minNote) {
+        List<MovieEntity> films = movieRepository.findFilmsByNoteGreaterThanEqual(minNote);
+        return new ResponseEntity<>(films, HttpStatus.OK);
+    }
 }

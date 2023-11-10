@@ -34,7 +34,7 @@ public class AlgoService {
     this.genreService = genreService;
   }
 
-  // Récupère les films avec des notes élevées (>= 3)
+  // Récupère les films avec des notes >= 3
   public List<Long> getHighRatingMovieIds(List<NoteEntity> userNotes) {
     return userNotes
       .stream()

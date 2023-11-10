@@ -8,6 +8,9 @@ const FilterBar = ({ updateFilter }) => {
     const [realisators, setRealisators] = useState([]);
     const [genres, setGenres] = useState([]);
     const [selectedGenre, setSelectedGenre] = useState("all");
+    const [selectedActor, setSelectedActor] = useState("all");
+    const [selectedReal, setSelectedReal] = useState("all");
+
 
 
     useEffect(() => {
@@ -26,7 +29,7 @@ const FilterBar = ({ updateFilter }) => {
         fetchData();
     }, []);
 
-    const getMovieByFilter = async (genreId) => {
+    const getMoviesByGenre = async (genreId) => {
         try {
             const genreFilterResponse = await getGenreFilter(genreId);
             updateFilter(genreFilterResponse);
@@ -35,14 +38,50 @@ const FilterBar = ({ updateFilter }) => {
         }
     }
 
+    const getMoviesByActor = async (actorId) => {
+        try {
+            const actorFilterResponse = await getActorFilter(actorId);
+            updateFilter(actorFilterResponse);
+        } catch (e) {
+            console.error("Une erreur s'est produite : ", e);
+        }
+    }
+
+    const getMoviesByReal = async (realId) => {
+        try {
+            const realFilterResponse = await getRealisatorFilter(realId);
+            updateFilter(realFilterResponse);
+        } catch (e) {
+            console.error("Une erreur s'est produite : ", e);
+        }
+    }
+
+
     // Gestionnaire d'événements pour le changement de sélection de genre
     const handleGenreChange = (event) => {
         const selectedGenreId = event.target.value;
         setSelectedGenre(selectedGenreId);
         if (selectedGenreId !== "all") {
-            getMovieByFilter(selectedGenreId);
+            getMoviesByGenre(selectedGenreId);
         }
     }
+
+    const handleActorChange = (event) => {
+        const selectedActorId = event.target.value;
+        setSelectedActor(selectedActorId);
+        if (selectedActorId !== "all") {
+            getMoviesByActor(selectedActorId);
+        }
+    }
+
+    const handleRealChange = (event) => {
+        const selectedRealId = event.target.value;
+        setSelectedActor(selectedRealId);
+        if (setSelectedReal !== "all") {
+            getMoviesByReal(selectedRealId);
+        }
+    }
+
 
 
 
@@ -60,16 +99,17 @@ const FilterBar = ({ updateFilter }) => {
 
             <label>
                 Acteur:
-                <select className='filter_select'>
+                <select className='filter_select' value={selectedActor} onChange={handleActorChange}>
                     <option value="all">Toutes les acteurs</option>
                     {actors.map((actor, index) => (
                         <option key={index} value={actor.id}> {actor.actorName} </option>
                     ))}
                 </select>
             </label>
+
             <label>
                 Realisateur:
-                <select className='filter_select'>
+                <select className='filter_select' value={selectedReal} onChange={handleRealChange} >
                     <option value="all">Toutes les reals</option>
                     {realisators.map((realisator, index) => (
                         <option key={index} value={realisator.id}> {realisator.realisatorName} </option>

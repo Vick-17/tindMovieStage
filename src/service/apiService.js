@@ -243,7 +243,7 @@ export const getRealisatorFilter = async (realisatorId) => {
 
 export const getActorFilter = async (actorId) => {
   try {
-    const response = await fetch(`${API_URL}/actors/actors?actorId=${actorId}`)
+    const response = await fetch(`${API_URL}/actors/moviesByActor?actorId=${actorId}`)
     if (!response.ok) {
       throw new Error("Erreur lors de la récupération des films")
     }

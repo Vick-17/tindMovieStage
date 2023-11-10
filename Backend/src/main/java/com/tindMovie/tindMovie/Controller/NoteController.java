@@ -1,14 +1,13 @@
 package com.tindMovie.tindMovie.Controller;
 
+import com.tindMovie.tindMovie.Model.MovieEntity;
 import com.tindMovie.tindMovie.Model.NoteEntity;
-import com.tindMovie.tindMovie.Repository.CommentaireRepository;
-import com.tindMovie.tindMovie.Repository.MovieRepository;
 import com.tindMovie.tindMovie.Repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -17,12 +16,6 @@ public class NoteController {
 
     @Autowired
     private NoteRepository noteRepository;
-
-    @Autowired
-    private MovieRepository movieRepository;
-
-    @Autowired
-    private CommentaireRepository commentaireRepository;
 
 
 
@@ -53,7 +46,6 @@ public class NoteController {
         List<NoteEntity> ratingMovie = noteRepository.findByMovieId(movieId);
 
         if (ratingMovie.isEmpty()) {
-            // Aucune note n'a été trouvée pour ce film, vous pouvez choisir de renvoyer une valeur par défaut.
             return 0.0;
         }
 

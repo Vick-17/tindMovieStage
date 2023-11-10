@@ -20,9 +20,11 @@ const Home = () => {
     }
 
     const updateFilter = (resultsFilter) => {
-        setFilterResults(resultsFilter);
+        // Concaténer les résultats filtrés avec les résultats existants
+        setFilterResults((prevResults) => [...prevResults, ...resultsFilter]);
         setDisplayMode("filter");
     }
+
 
     useEffect(() => {
         const fetchData = async () => {
