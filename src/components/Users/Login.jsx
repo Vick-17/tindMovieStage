@@ -10,12 +10,14 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { userLogiIn } from "../../service/apiService";
 import { toast, Toaster } from "react-hot-toast";
+import { useUserData } from "../../service/userService";
 
 const defaultTheme = createTheme();
 
 export default function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { userId } = useUserData();
 
   const handleEmailChange = (event) => {
     const newEmailValue = event.target.value;
@@ -26,7 +28,7 @@ export default function SignIn() {
     const newPasswordValue = event.target.value;
     setPassword(newPasswordValue);
   };
-
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = {
@@ -35,7 +37,11 @@ export default function SignIn() {
     };
 
     try {
-      await userLogiIn(formData);
+      if (userId) {
+        toast.error("Vous étes déjà connecter");
+      } else {
+        await userLogiIn(formData);
+      }
     } catch (error) {
       console.error(error);
       toast.error("Les identifications sont erronées");

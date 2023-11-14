@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -61,9 +60,9 @@ public class ActorController {
         ActorEntity actor = actorRepository.findById(actorId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
-        if (actor != null && actor.getMovieIds() != null && actor.getMovieIds().size() > 0) {
+        if (actor != null && actor.getMovieIds() != null && actor.getMovieIds().length > 0) {
             // Convertir les IDs de films une liste
-            List<Long> movieIds = actor.getMovieIds();
+            Long[] movieIds = actor.getMovieIds();
 
             // Rechecher les films correspondants dans genre
             return actorRepository.findMovieByActor(movieIds);

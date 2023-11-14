@@ -18,8 +18,8 @@ const LoginPage = () => {
       <Link
         className="toggle_link"
         onClick={toggleComponent}
-        href="#"
         variant="body2"
+        style={{cursor: "pointer"}}
       >
         {isLogin
           ? "Pas de compte ? Inscriver-vous"

@@ -132,12 +132,6 @@ public class UserController {
     }
   }
 
-  @GetMapping("/allUser")
-  @ResponseStatus(HttpStatus.OK)
-  @CrossOrigin
-  public Iterable<UsersEntity> get() {
-    return userRepository.findAll();
-  }
 
   @GetMapping("/getUserById/{userId}")
   @CrossOrigin

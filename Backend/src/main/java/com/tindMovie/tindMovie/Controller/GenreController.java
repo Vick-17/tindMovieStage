@@ -33,9 +33,9 @@ public class GenreController {
         GenreEntity genre = genreRepository.findById(genreId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
-        if (genre != null && genre.getMovieIds() != null && genre.getMovieIds().size() > 0) {
+        if (genre != null && genre.getMovieIds() != null && genre.getMovieIds().length > 0) {
             // Convertir les IDs de films une liste 
-            List<Long> movieIds = genre.getMovieIds();
+            Long[] movieIds = genre.getMovieIds();
 
             // Rechecher les films correspondants dans genre
             return genreRepository.findMovieByGenre(movieIds);

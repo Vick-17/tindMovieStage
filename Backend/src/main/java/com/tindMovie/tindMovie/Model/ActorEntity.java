@@ -18,8 +18,6 @@ public class ActorEntity {
     @Column(name = "actor_name")
     private String actorName;
 
-    @ElementCollection
-    @CollectionTable(name = "actor_movie_ids", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "movie_id")
-    private List<Long> movieIds;
+    @Column(name = "movie_ids")
+    private Long[] movieIds;
 }

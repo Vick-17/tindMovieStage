@@ -53,7 +53,7 @@ public class ActorService {
         // Vérification si l'acteur existe et s'il a des films associés
         if (actor != null && actor.getMovieIds() != null && actor.getMovieIds().length > 0) {
             // Convertir les IDs de films en une liste
-            List<Long> movieIds = Arrays.asList(actor.getMovieIds());
+            Long[] movieIds = actor.getMovieIds();
 
             // Rechercher les films correspondants dans le référentiel des acteurs
             return actorRepository.findMovieByActor(movieIds);

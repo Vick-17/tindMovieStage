@@ -13,7 +13,7 @@ import java.util.List;
 public interface ActorRepository extends CrudRepository<ActorEntity, Long> {
 
     @Query("SELECT m FROM MovieEntity m WHERE m.id IN :movieIds")
-    List<MovieEntity> findMovieByActor(@Param("movieIds") List<Long> movieIds);
+    List<MovieEntity> findMovieByActor(@Param("movieIds") Long[] movieIds);
 
     @Query("SELECT a.actorName FROM ActorEntity a WHERE :movieId IN (a.movieIds)")
     List<String> findActorsForMovie(@Param("movieId") Long movieId);    

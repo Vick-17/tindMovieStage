@@ -13,6 +13,6 @@ import com.tindMovie.tindMovie.Model.MovieEntity;
 public interface GenreRepository extends CrudRepository<GenreEntity, Long> {
 
 @Query("SELECT m FROM MovieEntity m WHERE m.id IN :movieIds")
-List<MovieEntity> findMovieByGenre(@Param("movieIds") List<Long> movieIds);
+List<MovieEntity> findMovieByGenre(@Param("movieIds") Long[] movieIds);
     
 }

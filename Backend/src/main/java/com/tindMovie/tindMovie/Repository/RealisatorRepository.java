@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface RealisatorRepository extends CrudRepository<RealisatorEntity, Long> {
     @Query("SELECT m FROM MovieEntity m WHERE m.id IN :movieIds")
-    List<MovieEntity> findMovieByRealisator(@Param("movieIds") List<Long> movieIds);
+    List<MovieEntity> findMovieByRealisator(@Param("movieIds") Long[] movieIds);
 
 }

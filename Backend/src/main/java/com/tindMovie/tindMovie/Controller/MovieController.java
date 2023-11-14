@@ -11,7 +11,6 @@ import com.tindMovie.tindMovie.Service.ActorService;
 import com.tindMovie.tindMovie.Service.AlgoService;
 import com.tindMovie.tindMovie.Service.MovieSearchService;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -139,21 +138,21 @@ public class MovieController {
         return new ResponseEntity<>(films, HttpStatus.OK);
     }
 
-    @GetMapping("/filter")
-    public ResponseEntity<List<MovieEntity>> getFilteredMovies(
-        @RequestParam(name = "genreId", required = false) Long genreId,
-        @RequestParam(name = "actorId", required = false) Long actorId,
-        @RequestParam(name = "realisatorId", required = false) Long realisatorId,
-        @RequestParam(name = "minRating", required = false) Double minRating) {
-          List<Long> emptyList = Collections.emptyList();
+    // @GetMapping("/filter")
+    // public ResponseEntity<List<MovieEntity>> getFilteredMovies(
+    //     @RequestParam(name = "genreId", required = false) Long genreId,
+    //     @RequestParam(name = "actorId", required = false) Long actorId,
+    //     @RequestParam(name = "realisatorId", required = false) Long realisatorId,
+    //     @RequestParam(name = "minRating", required = false) Double minRating) {
+    //       List<Long> emptyList = Collections.emptyList();
 
-      // Logique de filtrage en fonction des paramètres fournis
-      List<MovieEntity> filteredMovies = movieRepository.findFilteredMovies(
-          genreId, actorId, realisatorId, minRating, emptyList, emptyList, emptyList);
-      System.out.println("Genre ID: " + genreId + ", Actor ID: " + actorId + ", Realisator ID: " + realisatorId
-          + ", Min Rating: " + minRating);
-      System.out.println("Number of Results: " + filteredMovies.size());
+    //   // Logique de filtrage en fonction des paramètres fournis
+    //   List<MovieEntity> filteredMovies = movieRepository.findFilteredMovies(
+    //       genreId, actorId, realisatorId, minRating, emptyList, emptyList, emptyList);
+    //   System.out.println("Genre ID: " + genreId + ", Actor ID: " + actorId + ", Realisator ID: " + realisatorId
+    //       + ", Min Rating: " + minRating);
+    //   System.out.println("Number of Results: " + filteredMovies.size());
 
-      return new ResponseEntity<>(filteredMovies, HttpStatus.OK);
-    }
+    //   return new ResponseEntity<>(filteredMovies, HttpStatus.OK);
+    // }
 }

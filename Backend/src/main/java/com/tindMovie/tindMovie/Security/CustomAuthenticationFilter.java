@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -32,6 +34,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
     public static final String BAD_CREDENTIAL_MESSAGE = "Authentication failed for username: %s and password: %s";
 
     private final AuthenticationManager authenticationManager;
+
+    @Autowired
+    private final JwtUtils jwtUtils;
 
     /**
      * Tente d'effectuer l'authentification de l'utilisateur en utilisant le nom d'utilisateur et le mot de passe fournis.
@@ -88,9 +93,9 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         User user = (User) authentication.getPrincipal();
 
         // Création du jeton d'accès (access token) et du jeton de rafraîchissement (refresh token)
-        String accesToken = JwtUtils.createAccessToken(user.getUsername(), request.getRequestURL().toString(),
+        String accesToken = jwtUtils.createAccessToken(user.getUsername(), request.getRequestURL().toString(),
                 user.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()));
-        String refreshToken = JwtUtils.createRefreshToken(user.getUsername());
+        String refreshToken = jwtUtils.createRefreshToken(user.getUsername());
         // Ajout des en-têtes de réponse avec les jetons
         response.addHeader("access_token", accesToken);
         response.addHeader("refresh_token", refreshToken);

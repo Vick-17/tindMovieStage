@@ -19,9 +19,6 @@ public class RealisatorEntity {
     @Column(name = "realisator_name")
     private String realisatorName;
 
-    @ElementCollection
-    @CollectionTable(name = "realisator_movie_ids", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "movie_id")
-    private List<Long> movieIds;
-
+    @Column(name = "movie_ids")
+    private Long[] movieIds;
 }

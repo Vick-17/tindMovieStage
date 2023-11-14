@@ -1,7 +1,9 @@
 package com.tindMovie.tindMovie.Security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+
 
 import java.text.ParseException;
 import java.time.Instant;
@@ -22,11 +24,13 @@ import com.nimbusds.jwt.proc.ConfigurableJWTProcessor;
 import com.nimbusds.jwt.proc.DefaultJWTProcessor;
 
 
-public abstract class JwtUtils {
+public class JwtUtils {
     private static final int expireHourToken = 24; // Durée d'expiration du token d'accès en heures
     private static final int expireHourRefreshToken = 72; // Durée d'expiration du token de rafraîchissement en heures
 
-    private static final String SECRET = "FBA898697394CDBC534E7ED86A97AA59F627FE6B309E0A21EEC6C9B130E0369C"; // Clé secrète utilisée pour signer les JWT
+    @Value("${jwt.secret}")
+    private String SECRET;
+// Clé secrète utilisée pour signer les JWT
 
     /**
      * Crée un token d'accès JWT.
@@ -36,7 +40,7 @@ public abstract class JwtUtils {
      * @param roles  La liste des rôles associés à l'utilisateur
      * @return Le token d'accès JWT créé
      */
-    public static String createAccessToken(String email, String issuer, List<String> roles) {
+    public  String createAccessToken(String email, String issuer, List<String> roles) {
         try {
             JWTClaimsSet claims = new JWTClaimsSet.Builder()
                     .subject(email)
@@ -57,7 +61,7 @@ public abstract class JwtUtils {
         }
     }
 
-    public static String createRefreshToken(String username) {
+    public  String createRefreshToken(String username) {
         try {
             JWTClaimsSet claims = new JWTClaimsSet.Builder()
                     .subject(username)
@@ -85,7 +89,7 @@ public abstract class JwtUtils {
      * @throws ParseException   En cas d'erreur lors de l'analyse du token JWT
      * @throws BadJOSEException En cas d'erreur lors de la vérification du token JWT
      */
-    public static UsernamePasswordAuthenticationToken parseToken(String token) throws JOSEException, ParseException, BadJOSEException {
+    public UsernamePasswordAuthenticationToken parseToken(String token) throws JOSEException, ParseException, BadJOSEException {
         byte[] secretKey = SECRET.getBytes();
         SignedJWT signedJWT = SignedJWT.parse(token);
         signedJWT.verify(new MACVerifier(secretKey));

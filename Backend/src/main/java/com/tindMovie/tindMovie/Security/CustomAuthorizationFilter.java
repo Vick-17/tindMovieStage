@@ -7,6 +7,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -28,6 +30,9 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class CustomAuthorizationFilter extends OncePerRequestFilter {
 
+    @Autowired
+    private final JwtUtils jwtUtils;
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws IOException, ServletException {
         String token = null;
@@ -44,7 +49,7 @@ public class CustomAuthorizationFilter extends OncePerRequestFilter {
                     token = authorizationHeader.substring("Bearer ".length());
 
                     // Analyse et valide le jeton d'authentification
-                    UsernamePasswordAuthenticationToken authenticationToken = JwtUtils.parseToken(token);
+                    UsernamePasswordAuthenticationToken authenticationToken = jwtUtils.parseToken(token);
 
                     // Définit l'authentification de l'utilisateur dans le contexte de sécurité
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
