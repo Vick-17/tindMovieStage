@@ -20,8 +20,6 @@ public class MovieEntity {
     private String duree;
     private String image;
 
-    @Column(name = "note_moyenne")
-    private Integer noteMoyenne;
     private String synopsis;
 
     @Column(name = "commentaire_id")

@@ -3,15 +3,13 @@ import Rating from '@mui/material/Rating';
 import Stack from '@mui/material/Stack';
 import { getAllActor, getAllReal, getAllGenre, getGenreFilter, getRealisatorFilter, getActorFilter } from '../../service/apiService';
 
-const FilterBar = ({ updateFilter }) => {
+const FilterBar = ({ updateFilter, displayedMovies }) => {
     const [actors, setActors] = useState([]);
     const [realisators, setRealisators] = useState([]);
     const [genres, setGenres] = useState([]);
     const [selectedGenre, setSelectedGenre] = useState("all");
     const [selectedActor, setSelectedActor] = useState("all");
     const [selectedReal, setSelectedReal] = useState("all");
-
-
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,7 +19,7 @@ const FilterBar = ({ updateFilter }) => {
                 const genreResponse = await getAllGenre();
                 setActors(actorResponse);
                 setRealisators(realResponse);
-                setGenres(genreResponse)
+                setGenres(genreResponse);
             } catch (e) {
                 console.error("Une erreur s'est produite : ", e);
             }
@@ -32,7 +30,8 @@ const FilterBar = ({ updateFilter }) => {
     const getMoviesByGenre = async (genreId) => {
         try {
             const genreFilterResponse = await getGenreFilter(genreId);
-            updateFilter(genreFilterResponse);
+            const combinedFilter = combineFilters(genreFilterResponse, displayedMovies);
+            updateFilter(combinedFilter);
         } catch (e) {
             console.error("Une erreur s'est produite : ", e);
         }
@@ -41,7 +40,8 @@ const FilterBar = ({ updateFilter }) => {
     const getMoviesByActor = async (actorId) => {
         try {
             const actorFilterResponse = await getActorFilter(actorId);
-            updateFilter(actorFilterResponse);
+            const combinedFilter = combineFilters(actorFilterResponse, displayedMovies);
+            updateFilter(combinedFilter);
         } catch (e) {
             console.error("Une erreur s'est produite : ", e);
         }
@@ -50,14 +50,19 @@ const FilterBar = ({ updateFilter }) => {
     const getMoviesByReal = async (realId) => {
         try {
             const realFilterResponse = await getRealisatorFilter(realId);
-            updateFilter(realFilterResponse);
+            const combinedFilter = combineFilters(realFilterResponse, displayedMovies);
+            updateFilter(combinedFilter);
         } catch (e) {
             console.error("Une erreur s'est produite : ", e);
         }
     }
 
+    // Fonction utilitaire pour combiner les filtres
+    const combineFilters = (newFilter, oldFilter) => {
+        return [...new Set([...oldFilter, ...newFilter])];
+    };
 
-    // Gestionnaire d'événements pour le changement de sélection de genre
+    // Gestionnaires d'événements pour le changement de sélection
     const handleGenreChange = (event) => {
         const selectedGenreId = event.target.value;
         setSelectedGenre(selectedGenreId);
@@ -76,8 +81,8 @@ const FilterBar = ({ updateFilter }) => {
 
     const handleRealChange = (event) => {
         const selectedRealId = event.target.value;
-        setSelectedActor(selectedRealId);
-        if (setSelectedReal !== "all") {
+        setSelectedReal(selectedRealId);
+        if (selectedRealId !== "all") {
             getMoviesByReal(selectedRealId);
         }
     }

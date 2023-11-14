@@ -61,9 +61,9 @@ public class ActorController {
         ActorEntity actor = actorRepository.findById(actorId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
-        if (actor != null && actor.getMovieIds() != null && actor.getMovieIds().length > 0) {
+        if (actor != null && actor.getMovieIds() != null && actor.getMovieIds().size() > 0) {
             // Convertir les IDs de films une liste
-            List<Long> movieIds = Arrays.asList(actor.getMovieIds());
+            List<Long> movieIds = actor.getMovieIds();
 
             // Rechecher les films correspondants dans genre
             return actorRepository.findMovieByActor(movieIds);

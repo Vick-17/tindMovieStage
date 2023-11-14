@@ -1,11 +1,10 @@
 package com.tindMovie.tindMovie.Controller;
 
-import com.tindMovie.tindMovie.Model.MovieEntity;
+
 import com.tindMovie.tindMovie.Model.NoteEntity;
 import com.tindMovie.tindMovie.Repository.NoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

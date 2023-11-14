@@ -41,9 +41,9 @@ public class RealisatorController {
         RealisatorEntity real = realisatorRepository.findById(realisatorId).orElse(null);
 
         // Vérification si le genre existe et s'il a des film associés
-        if (real != null && real.getMovieIds() != null && real.getMovieIds().length > 0) {
+        if (real != null && real.getMovieIds() != null && real.getMovieIds().size() > 0) {
             // Convertir les IDs de films une liste 
-            List<Long> movieIds = Arrays.asList(real.getMovieIds());
+            List<Long> movieIds = real.getMovieIds();
 
             // Rechecher les films correspondants dans real
             return realisatorRepository.findMovieByRealisator(movieIds);

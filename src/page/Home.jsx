@@ -11,6 +11,7 @@ const Home = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [searchResults, setSearchResults] = useState([]);
     const [filterResults, setFilterResults] = useState([]);
+    const [displayedMovies, setDisplayedMovies] = useState([]);
     const { userId } = useUserData();
     const [displayMode, setDisplayMode] = useState("all");
 
@@ -20,10 +21,14 @@ const Home = () => {
     }
 
     const updateFilter = (resultsFilter) => {
-        // Concaténer les résultats filtrés avec les résultats existants
-        setFilterResults((prevResults) => [...prevResults, ...resultsFilter]);
-        setDisplayMode("filter");
+        if (resultsFilter.length > 0) {
+            const newDisplayedMovies = resultsFilter.filter(movie => !displayedMovies.includes(movie));
+            setFilterResults(resultsFilter);
+            setDisplayedMovies((prevMovies) => [...prevMovies, ...newDisplayedMovies]);
+            setDisplayMode("filter");
+        }
     }
+
 
 
     useEffect(() => {
@@ -66,7 +71,7 @@ const Home = () => {
     return (
         <>
             <SearchBar updateSearchResults={updateSearchResults} />
-            <FilterBar updateFilter={updateFilter} />
+            <FilterBar updateFilter={updateFilter} displayedMovies={displayedMovies} />
             <div className="all_movie_container">
                 {isLoading ? (
                     <Loader />

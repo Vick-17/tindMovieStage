@@ -18,6 +18,8 @@ public class GenreEntity {
     @Column( name = "nom_genre")
     private String nomGenre;
 
-    @Column(name = "movie_ids")
-    private Long[] movieIds;
+    @ElementCollection
+    @CollectionTable(name = "genre_movie_ids", joinColumns = @JoinColumn(name = "genre_id"))
+    @Column(name = "movie_id")
+    private List<Long> movieIds;
 }
