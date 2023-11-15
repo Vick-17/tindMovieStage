@@ -1,0 +1,20 @@
+# Utilisez une image de Maven avec Java 17 pour construire votre application Spring Boot
+FROM maven:3.8.4-openjdk-17 as builder
+
+# Copiez le code source de l'application Spring Boot dans le conteneur
+COPY . /app
+
+# Définissez le répertoire de travail
+WORKDIR /app
+
+# Exécutez le build de votre application Spring Boot avec Maven
+RUN mvn clean package
+
+# Utilisez une image de Java 17 sans Maven pour exécuter l'application Spring Boot
+FROM openjdk:17-jdk
+
+# Copiez le jar de l'application Spring Boot construite dans le conteneur à partir de l'étape précédente
+COPY --from=builder /app/target/tindMovie-0.0.1-SNAPSHOT.jar /app.jar
+
+# Exécutez l'application Spring Boot lors du démarrage du conteneur
+ENTRYPOINT ["java", "-jar", "/app.jar"]

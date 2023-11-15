@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  hostel-front:
+    image: "tindMovie-front"
+    # l'image nginx expose le port 80, on effectue une redirection pour avoir 8080 en façade
+    ports:
+      - "8080:80"
+    links:
+      - tindMovie-api
+
+  hostel-api:
+    image: 'tindMovie-api'
+    # on effectue une redirection de port 8000 pour rendre l'API accessible de partout, sympa.
+    ports:
+      - "8000:8000"
+    depends_on:
+      PostgreSQL:
+        condition: service_healthy
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-rakoon.alwaysdata.net:5432/rakoon_tindmovie
+      - SPRING_DATASOURCE_PASSWORD=rMFRmWKYT8AXFxz
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+
+  PostgreSQL:
+    image: postgres:15
+    container_name: rakoon_tindmovie
+    environment:
+      - POSTGRES_USER=rakoon
+      - POSTGRES_PASSWORD=rMFRmWKYT8AXFxz
+      - POSTGRES_DB=rakoon_tindmovie
+    logging: # option de paramétrage des logs
+      options:
+        max-size: 10m # fichier de 10 Mo maximum
+        max-file: "3" # jusqu'à 3 fichiers de log
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    # on ne redirige pas le port 5432 par sécurité, la base de données est ainsi inaccessible ailleurs que entre les conteneurs
+    ports:
+      - '5432:5432'
+    volumes:
+      - ./db/1_db-creation.sql:/docker-entrypoint-initdb.d/1_db-creation.sql
