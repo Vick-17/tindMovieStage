@@ -10,6 +10,8 @@ WORKDIR /app
 # Exécutez le build de votre application Spring Boot avec Maven
 RUN mvn clean package
 
+
+
 # Utilisez une image de Java 17 sans Maven pour exécuter l'application Spring Boot
 FROM openjdk:17-jdk
 

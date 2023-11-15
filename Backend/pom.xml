@@ -11,7 +11,7 @@
     <groupId>com.tindMovie</groupId>
     <artifactId>tindMovie</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>tindMovie</name>
     <description>Api spring pour mon projet tinder films</description>
     <properties>

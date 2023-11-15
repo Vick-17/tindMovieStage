@@ -2,7 +2,7 @@
 FROM node:20-alpine as builder
 # paramétrage du dossier courant pour le build
 WORKDIR /app
-COPY ./ .
+COPY . .
 # suppression du contenu de nodes_modules
 RUN rm -rf node_modules
 # npm ci similaire à npm install (mais environnement automatisé) -> installation de tous les packages nécessaires au build

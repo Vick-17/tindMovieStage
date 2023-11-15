@@ -1,15 +1,15 @@
 version: '3.8'
 services:
-  hostel-front:
-    image: "tindMovie-front"
+  tindMovie-front:
+    image: "frontend"
     # l'image nginx expose le port 80, on effectue une redirection pour avoir 8080 en façade
     ports:
       - "8080:80"
     links:
       - tindMovie-api
 
-  hostel-api:
-    image: 'tindMovie-api'
+  tindMovie-api:
+    image: backend:latest
     # on effectue une redirection de port 8000 pour rendre l'API accessible de partout, sympa.
     ports:
       - "8000:8000"
@@ -19,7 +19,7 @@ services:
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgresql-rakoon.alwaysdata.net:5432/rakoon_tindmovie
       - SPRING_DATASOURCE_PASSWORD=rMFRmWKYT8AXFxz
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=none
 
   PostgreSQL:
     image: postgres:15
